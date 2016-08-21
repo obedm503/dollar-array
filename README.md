@@ -4,7 +4,8 @@
 ----
 ## Installation
     npm i -S obedm503-array
-
+----
+## [Docs](./DOCS.md)
 ----
 ## License
 MIT
