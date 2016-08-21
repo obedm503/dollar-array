@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "A tiny utility library for working with arrays [of objects].",
   "main": "gulpfile.js",
-  "author": "obedm503",
+  "author": "obedm503 <obedm503@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "gulp": "^3.9.1",

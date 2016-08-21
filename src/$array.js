@@ -1,10 +1,10 @@
 /**
 * @name $array
 * @description $arrayJS: a simple JavaScript utility library for working with arrays of objects.
-* @author obedm503 <obedm503@gmail.com>
+* @author [obedm503](https://github.com/obedm503/) <obedm503@gmail.com>
 * @see [git repo](https://github.com/obedm503/obedm503-array.git)
 * @version 1.0.0
-* @license MIT
+* @license [MIT](./LICENSE.md)
 */
 (function(window){
   'use strict';
@@ -29,12 +29,12 @@
     * @param {string} key The key to check within the objects.
     * @returns {boolean} Whether the key exists within any object.
     * @example
-    var exampleArray = [
-      { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },
-      { name: "John", lastname: "Doe", user_id:"6789", age:40 },
-      { name: "Pedro", lastname: "Algo", age:30  }
-    ];
-    $array.keyExists(exampleArray)('user_id'); //true
+    * var exampleArray = [
+    *   { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },
+    *   { name: "John", lastname: "Doe", user_id:"6789", age:40 },
+    *   { name: "Pedro", lastname: "Algo", age:30  }
+    * ];
+    * $array.keyExists(exampleArray)('user_id'); //true
     */
     function keyExists(arr){
       if(arr && Array.isArray(arr)){
@@ -59,13 +59,13 @@
     * @param {string} [newKey] Optional. The key to substitute the old key with... if that makes sense.
     * @returns {object[]} An array of objects, each with a single key-value pair.
     * @example
-    var exampleArray = [
-      { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },
-      { name: "John", lastname: "Doe", user_id:"6789", age:40 },
-      { name: "Pedro", lastname: "Algo", age:30  }
-    ];
-    $array.filterByKey(exampleArray)('user_id'); //[{user_id:"1234"}, {user_id:"6789"}]
-    $array.filterByKey(exampleArray)('user_id','id'); //[{id:"1234"}, {id:"6789"}]
+    * var exampleArray = [
+    *   { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },
+    *   { name: "John", lastname: "Doe", user_id:"6789", age:40 },
+    *   { name: "Pedro", lastname: "Algo", age:30  }
+    * ];
+    * $array.filterByKey(exampleArray)('user_id'); //[{user_id:"1234"}, {user_id:"6789"}]
+    * $array.filterByKey(exampleArray)('user_id','id'); //[{id:"1234"}, {id:"6789"}]
     */
     function filterByKey(arr){
       if(arr && Array.isArray(arr)){
@@ -94,17 +94,17 @@
     * @param {array} arr An array.
     * @returns {array} The reversed array.
     * @example
-    var exampleArray = [
-      { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },
-      { name: "John", lastname: "Doe", user_id:"6789", age:40 },
-      { name: "Pedro", lastname: "Algo", age:30  }
-    ];
-    $array.reverse(exampleArray);
-    //[
-    // { name: "Pedro", lastname: "Algo", age:30  }
-    // { name: "John", lastname: "Doe", user_id:"6789", age:40 },
-    // { name: "Juan", lastname: "Perez", user_id:"1234", age:42 }
-    //]
+    * var exampleArray = [
+    *   { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },
+    *   { name: "John", lastname: "Doe", user_id:"6789", age:40 },
+    *   { name: "Pedro", lastname: "Algo", age:30  }
+    * ];
+    * $array.reverse(exampleArray);
+    * //[
+    * // { name: "Pedro", lastname: "Algo", age:30  }
+    * // { name: "John", lastname: "Doe", user_id:"6789", age:40 },
+    * // { name: "Juan", lastname: "Perez", user_id:"1234", age:42 }
+    * //]
     */
     function reverse(arr){
       if(arr && Array.isArray(arr)){
@@ -125,12 +125,12 @@
     * @param {array} arr An array.
     * @returns {array} An array with randomized order.
     * @example
-    var exampleArray = [
-      { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },
-      { name: "John", lastname: "Doe", user_id:"6789", age:40 },
-      { name: "Pedro", lastname: "Algo", age:30  }
-    ];
-    $array.sortRandom(exampleArray); //randomized array...
+    * var exampleArray = [
+    *   { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },
+    *   { name: "John", lastname: "Doe", user_id:"6789", age:40 },
+    *   { name: "Pedro", lastname: "Algo", age:30  }
+    * ];
+    * $array.sortRandom(exampleArray); //randomized array...
     */
     function sortRandom(arr){
       if(arr && Array.isArray(arr)) {
@@ -156,23 +156,23 @@
     * @param {string} key The key with which to sort the array
     * @returns {object[]} Array with objects sorted
     * @example
-    var exampleArray = [
-      { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },
-      { name: "John", lastname: "Doe", user_id:"6789", age:40 },
-      { name: "Pedro", lastname: "Algo", age:30  }
-    ];
-    $array.sortAscend(exampleArray)('lastname');
-    //[
-    //  { name: "Pedro", lastname: "Algo", age:30  },
-    //  { name: "John", lastname: "Doe", user_id:"6789", age:40 },
-    //  { name: "Juan", lastname: "Perez", user_id:"1234", age:42 }
-    //]
-    $array.sortAscend(exampleArray)('age');
-    //[
-    //  { name: "Pedro", lastname: "Algo", age:30  },
-    //  { name: "John", lastname: "Doe", user_id:"6789", age:40 },
-    //  { name: "Juan", lastname: "Perez", user_id:"1234", age:42 }
-    //]
+    * var exampleArray = [
+    *   { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },
+    *   { name: "John", lastname: "Doe", user_id:"6789", age:40 },
+    *   { name: "Pedro", lastname: "Algo", age:30  }
+    * ];
+    * $array.sortAscend(exampleArray)('lastname');
+    * //[
+    * //  { name: "Pedro", lastname: "Algo", age:30  },
+    * //  { name: "John", lastname: "Doe", user_id:"6789", age:40 },
+    * //  { name: "Juan", lastname: "Perez", user_id:"1234", age:42 }
+    * //]
+    * $array.sortAscend(exampleArray)('age');
+    * //[
+    * //  { name: "Pedro", lastname: "Algo", age:30  },
+    * //  { name: "John", lastname: "Doe", user_id:"6789", age:40 },
+    * //  { name: "Juan", lastname: "Perez", user_id:"1234", age:42 }
+    * //]
     */
     function sortAscend(arr){
       if(arr && Array.isArray(arr)){
@@ -194,23 +194,23 @@
     * @param {string} key The key with which to sort the array.
     * @returns {object[]} Array with objects sorted.
     * @example
-    var exampleArray = [
-      { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },
-      { name: "John", lastname: "Doe", user_id:"6789", age:40 },
-      { name: "Pedro", lastname: "Algo", age:30  }
-    ];
-    $array.sortDescend(exampleArray)('lastname');
-    //[
-    //  { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },
-    //  { name: "John", lastname: "Doe", user_id:"6789", age:40 },
-    //  { name: "Pedro", lastname: "Algo", age:30  }
-    //]
-    $array.sortDescend(exampleArray)('age');
-    //[
-    //  { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },
-    //  { name: "John", lastname: "Doe", user_id:"6789", age:40 },
-    //  { name: "Pedro", lastname: "Algo", age:30  }
-    //]
+    * var exampleArray = [
+    *   { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },
+    *   { name: "John", lastname: "Doe", user_id:"6789", age:40 },
+    *   { name: "Pedro", lastname: "Algo", age:30  }
+    * ];
+    * $array.sortDescend(exampleArray)('lastname');
+    * //[
+    * //  { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },
+    * //  { name: "John", lastname: "Doe", user_id:"6789", age:40 },
+    * //  { name: "Pedro", lastname: "Algo", age:30  }
+    * //]
+    * $array.sortDescend(exampleArray)('age');
+    * //[
+    * //  { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },
+    * //  { name: "John", lastname: "Doe", user_id:"6789", age:40 },
+    * //  { name: "Pedro", lastname: "Algo", age:30  }
+    * //]
     */
     function sortDescend(arr){
       if(arr && Array.isArray(arr)){
@@ -232,17 +232,17 @@
     * @param {string} key Takes the key that exisist in all objects in the array. The value of this key will become the key to each object.
     * @returns {object} Returns the array of objects converted into an object.
     * @example
-    var exampleArray = [
-      { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },
-      { name: "John", lastname: "Doe", user_id:"6789", age:40 },
-      { name: "Pedro", lastname: "Algo", age:30  }
-    ];
-    $array.convertToObject(exampleArray)('lastname');
-    //{
-    //  Perez: { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },
-    //  Doe: { name: "John", lastname: "Doe", user_id:"6789", age:40 },
-    //  Algo: { name: "Pedro", lastname: "Algo", age:30  }
-    //}
+    * var exampleArray = [
+    *   { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },
+    *   { name: "John", lastname: "Doe", user_id:"6789", age:40 },
+    *   { name: "Pedro", lastname: "Algo", age:30  }
+    * ];
+    * $array.convertToObject(exampleArray)('lastname');
+    * //{
+    * //  Perez: { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },
+    * //  Doe: { name: "John", lastname: "Doe", user_id:"6789", age:40 },
+    * //  Algo: { name: "Pedro", lastname: "Algo", age:30  }
+    * //}
     */
   	function convertToObject(arr){
       if(arr && Array.isArray(arr)){
@@ -277,24 +277,24 @@
     An array of arrays with the objects grouped in the same order according to the array of callbacks passed.
     All objects which match no conditional, are grouped on the last array.
     * @example
-    var exampleArray = [
-      { name: "Juan", lastname: "Perez", user_id:"1234", age:42},
-      { name: "John", lastname: "Doe", user_id:"6789", age:40},
-      { name: "Pedro", lastname: "Algo", age:30}
-    ];
-    $array.groupObjects(exampleArray)([function(o){ return o.lastname === 'Doe'; }, function(o){ return o.age > 35; }])
-    //[
-    //  [
-    //    { name: "John", lastname: "Doe", user_id:"6789", age:40 }
-    //  ],
-    //  [
-    //    { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },
-    //    { name: "John", lastname: "Doe", user_id:"6789", age:40 }
-    //  ],
-    //  [
-    //    { name: "Pedro", lastname: "Algo", age:30 }
-    //  ]
-    //]
+    * var exampleArray = [
+    *   { name: "Juan", lastname: "Perez", user_id:"1234", age:42},
+    *   { name: "John", lastname: "Doe", user_id:"6789", age:40},
+    *   { name: "Pedro", lastname: "Algo", age:30}
+    * ];
+    * $array.groupObjects(exampleArray)([function(o){ return o.lastname === 'Doe'; }, function(o){ return o.age > 35; }])
+    * //[
+    * //  [
+    * //    { name: "John", lastname: "Doe", user_id:"6789", age:40 }
+    * //  ],
+    * //  [
+    * //    { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },
+    * //    { name: "John", lastname: "Doe", user_id:"6789", age:40 }
+    * //  ],
+    * //  [
+    * //    { name: "Pedro", lastname: "Algo", age:30 }
+    * //  ]
+    * //]
     */
     function groupObjects(arr) {
       return function(conds){
