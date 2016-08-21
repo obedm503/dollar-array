@@ -1,0 +1,17 @@
+{
+  "name": "obedm503-array",
+  "repository": "git:https://github.com/obedm503/obedm503-array.git",
+  "version": "1.0.0",
+  "description": "A tiny utility library for working with arrays [of objects].",
+  "main": "gulpfile.js",
+  "author": "obedm503",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-jsdoc-to-markdown": "^1.2.2",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^2.0.0",
+    "gulp-util": "^3.0.7",
+    "jsdoc-to-markdown": "^1.3.7"
+  }
+}

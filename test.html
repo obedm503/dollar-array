@@ -1,0 +1,59 @@
+<script src="dist/$array.min.js"></script>
+<script src="../JSON.get/JSON.get.js"></script>
+<script>
+  var hw,
+  key = 'calc_class',
+  filterByKey,
+  simple,
+  exampleArray = [
+    { name: "Juan", lastname: "Perez", user_id:"1234", age:42},
+    { name: "John", lastname: "Doe", user_id:"6789", age:40},
+    { name: "Pedro", lastname: "Algo", age:30}
+  ],
+  url = 'https://6ad81d6bd1586420daecb5b133f5e5685eeff289.googledrive.com/host/0B8QaOFt88YYmakRCNmpESlNYdTA/homework.json';
+
+  JSON.get(url).then(function(json){
+    hw = json;
+    filterByKey = $array.filterByKey(json)(key);
+    document.getElementById('divkey').innerHTML = key;
+    document.getElementById('keyExists').innerHTML = JSON.stringify($array.keyExists(json)(key));
+    document.getElementById('filterByKey').innerHTML = JSON.stringify(filterByKey);
+    document.getElementById('reverse').innerHTML = JSON.stringify($array.reverse(filterByKey));
+    document.getElementById('sortAscend').innerHTML = JSON.stringify($array.sortAscend(filterByKey)(key));
+    document.getElementById('sortDescend').innerHTML = JSON.stringify($array.sortDescend(filterByKey)(key));
+    document.getElementById('sortRandom').innerHTML = JSON.stringify($array.sortRandom(filterByKey));
+    document.getElementById('convertToObject').innerHTML = JSON.stringify($array.convertToObject(filterByKey)(key));
+    document.getElementById('groupObjects').innerHTML = JSON.stringify($array.groupObjects(filterByKey)([
+      function(o){ return o.calc_class[0] === 'P' },
+      function(o){ return o.calc_class[0] === 'A' }
+    ]));
+  });
+</script>
+<body>
+  key = <span id="divkey"></span>
+  <br />
+  <br />
+  $array.keyExists()
+  <div id="keyExists"></div>
+  <br />
+  $array.filterByKey()
+  <div id="filterByKey"></div>
+  <br />
+  $array.reverse()
+  <div id="reverse"></div>
+  <br />
+  $array.sortAscend()
+  <div id="sortAscend"></div>
+  <br />
+  $array.sortDescend()
+  <div id="sortDescend"></div>
+  <br />
+  $array.sortRandom()
+  <div id="sortRandom"></div>
+  <br />
+  $array.convertToObject()
+  <div id="convertToObject"></div>
+  <br />
+  $array.groupObjects()
+  <div id="groupObjects"></div>
+</body>
