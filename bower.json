@@ -1,7 +1,7 @@
 {
   "name": "obedm503-array",
   "description": "A tiny utility library for working with arrays [of objects].",
-  "main": "./dist/$array.js",
+  "main": "./src/$array.js",
   "authors": [
     "obedm503 <obedm503@gmail.com>"
   ],

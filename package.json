@@ -3,7 +3,7 @@
   "repository": "git:https://github.com/obedm503/obedm503-array.git",
   "version": "1.0.2",
   "description": "A tiny utility library for working with arrays [of objects].",
-  "main": "./dist/$array.js",
+  "main": "./src/$array.js",
   "author": "obedm503 <obedm503@gmail.com>",
   "license": "MIT",
   "devDependencies": {
