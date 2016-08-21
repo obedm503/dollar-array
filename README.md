@@ -6,7 +6,7 @@
     npm i -S obedm503-array
 ----
 ## Example Usage
-### For more examples check the [docs](./DOCS.md).
+For more examples check the [docs](DOCS.md).
 ```js
 var exampleArray = [
   { name: "Juan", lastname: "Perez", user_id:"1234", age:42},
@@ -35,7 +35,7 @@ $array.groupObjects(exampleArray)([
 ```
 ----
 ## Docs
-### Docs are stored in their own [file](./DOCS.md).
+Docs are stored in their own [file](DOCS.md).
 ----
 ## License
-[MIT](./LICENSE.md)
+[MIT](LICENSE.md)

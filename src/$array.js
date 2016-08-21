@@ -4,7 +4,7 @@
 * @author [obedm503](https://github.com/obedm503/) <obedm503@gmail.com>
 * @see [git repo](https://github.com/obedm503/obedm503-array.git)
 * @version 1.0.0
-* @license [MIT](./LICENSE.md)
+* @license [MIT](../LICENSE.md)
 */
 (function(window){
   'use strict';
