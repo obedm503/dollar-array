@@ -5,9 +5,9 @@ $arrayJS: a simple JavaScript utility library for working with arrays of objects
 
 **Kind**: global variable  
 **See**: [git repo](https://github.com/obedm503/obedm503-array.git)  
-**Version**: 1.0.0  
+**Version**: 1.1.0  
 **Author:** [obedm503](https://github.com/obedm503/) <obedm503@gmail.com>  
-**License**: [MIT](./LICENSE.md)  
+**License**: MIT  
 
 * [$array](#$array)
     * [.keyExists(arr, key)](#$array.keyExists) ⇒ <code>boolean</code>

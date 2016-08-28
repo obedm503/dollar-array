@@ -1,9 +1,16 @@
 # $arrayJS
 
-### A simple JavaScript front end utility library for working with arrays of objects. Originally designed for use in [StudentAccess](https://github.com/ncai-developers/studentaccess) project.
+>A simple JavaScript front end utility library for working with arrays of objects. Originally designed for use in [StudentAccess](https://github.com/ncai-developers/studentaccess) project.
+
 ----
 ## Installation
-  npm i -S obedm503-array
+```
+$ bower install --save dollar-array
+```
+or
+```
+$ npm iinstall --save dollar-array
+```
 ----
 ## Example Usage
 For more examples check the DOCS.md file.
@@ -55,6 +62,7 @@ $array.groupObjects(exampleArray)([
 ----
 ## Docs
 Docs live in the DOCS.md file.
+
 ----
 ## License
 MIT

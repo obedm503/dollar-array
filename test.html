@@ -1,5 +1,4 @@
 <script src="dist/$array.min.js"></script>
-<script src="../JSON.get/JSON.get.js"></script>
 <script>
   var hw,
   key = 'calc_class',
@@ -12,7 +11,9 @@
   ],
   url = 'https://6ad81d6bd1586420daecb5b133f5e5685eeff289.googledrive.com/host/0B8QaOFt88YYmakRCNmpESlNYdTA/homework.json';
 
-  JSON.get(url).then(function(json){
+  fetch(url).then(function(data){
+    return data.json()
+  }).then(function(json){
     hw = json;
     filterByKey = $array.filterByKey(json)(key);
     document.getElementById('divkey').innerHTML = key;

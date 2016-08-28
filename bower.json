@@ -1,13 +1,13 @@
 {
-  "name": "obedm503-array",
+  "name": "dollar-array",
   "description": "A tiny utility library for working with arrays [of objects].",
   "main": "./src/$array.js",
   "authors": [
-    "obedm503 <obedm503@gmail.com>"
+    "obedm503"
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/obedm503/obedm503-array.git"
+    "url": "git://github.com/obedm503/dollar-array.git"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
@@ -26,14 +26,20 @@
     "util",
     "utility",
     "object",
+	"dollar-array",
+	"dollar",
     "json"
   ],
-  "homepage": "https://github.com/obedm503/obedm503-array",
+  "homepage": "https://github.com/obedm503/dollar-array",
   "ignore": [
-    "**/.*",
+	".git",
     "node_modules",
     "bower_components",
-    "test",
-    "tests"
+    "test.html",
+    "tests",
+	"gulpfile.js",
+	"*.md",
+	"*.txt",
+	"src"
   ]
 }
