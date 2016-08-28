@@ -9,7 +9,7 @@ $ bower install --save dollar-array
 ```
 or
 ```
-$ npm iinstall --save dollar-array
+$ npm install --save dollar-array
 ```
 ----
 ## Example Usage
