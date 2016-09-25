@@ -9,14 +9,7 @@
     "type": "git",
     "url": "git://github.com/obedm503/dollar-array.git"
   },
-  "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-jsdoc-to-markdown": "^1.2.2",
-    "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^2.0.0",
-    "gulp-util": "^3.0.7",
-    "jsdoc-to-markdown": "^1.3.7"
-  },
+  "devDependencies": {},
   "dependencies":{},
   "license": "MIT",
   "keywords": [
@@ -26,8 +19,8 @@
     "util",
     "utility",
     "object",
-	"dollar-array",
-	"dollar",
+		"dollar-array",
+		"dollar",
     "json"
   ],
   "homepage": "https://github.com/obedm503/dollar-array",
@@ -37,9 +30,9 @@
     "bower_components",
     "test.html",
     "tests",
-	"gulpfile.js",
-	"*.md",
-	"*.txt",
-	"src"
+		"gulpfile.js",
+		"*.md",
+		"*.txt",
+		"src"
   ]
 }
