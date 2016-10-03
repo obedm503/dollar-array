@@ -1,60 +1,74 @@
-<script src="dist/$array.min.js"></script>
-<script>
-  var hw,
-  key = 'calc_class',
-  filterByKey,
-  simple,
-  exampleArray = [
-    { name: "Juan", lastname: "Perez", user_id:"1234", age:42},
-    { name: "John", lastname: "Doe", user_id:"6789", age:40},
-    { name: "Pedro", lastname: "Algo", age:30}
-  ],
-  url = 'https://6ad81d6bd1586420daecb5b133f5e5685eeff289.googledrive.com/host/0B8QaOFt88YYmakRCNmpESlNYdTA/homework.json';
-
-  fetch(url).then(function(data){
-    return data.json()
-  }).then(function(json){
-    hw = json;
-    filterByKey = $array.filterByKey(json)(key);
-    document.getElementById('divkey').innerHTML = key;
-    document.getElementById('keyExists').innerHTML = JSON.stringify($array.keyExists(json)(key));
-    document.getElementById('filterByKey').innerHTML = JSON.stringify(filterByKey);
-    document.getElementById('reverse').innerHTML = JSON.stringify($array.reverse(filterByKey));
-    document.getElementById('sortAscend').innerHTML = JSON.stringify($array.sortAscend(filterByKey)(key));
-    document.getElementById('sortDescend').innerHTML = JSON.stringify($array.sortDescend(filterByKey)(key));
-    document.getElementById('sortRandom').innerHTML = JSON.stringify($array.sortRandom(filterByKey));
-    document.getElementById('convertToObject').innerHTML = JSON.stringify($array.convertToObject(filterByKey)(key));
-    document.getElementById('groupObjects').innerHTML = JSON.stringify($array.groupObjects(filterByKey)([
-      function(o){ return o.calc_class[0] === 'P' },
-      function(o){ return o.calc_class[0] === 'A' }
-    ]));
-  });
-</script>
+<!DOCTYPE html5>
+<head>
+	<title>$array.js</title>
+	<script src="src/$array.js"></script>
+	<script>
+	  var key = 'lastname',
+	  filterByKey,
+	  simple,
+	  exampleArray = [
+	    { "name": "Juan", "lastname": "Perez", "user_id":"1234", "age":42 },
+	    { "name": "John", "lastname": "Doe", "user_id":"6789", "age":40 },
+	    { "name": "Pedro", "lastname": "Algo", age:30 }
+	  ];
+		window.onload = function(){
+			var array = $array(exampleArray);
+			document.getElementById('key').innerHTML = `"${key}"`;
+			document.getElementById('original').innerHTML = JSON.stringify(exampleArray);
+			document.getElementById('keyExists').innerHTML = JSON.stringify(array.keyExists(key));
+			document.getElementById('filterByKey').innerHTML = JSON.stringify(array.filterByKey(key));
+			document.getElementById('invert').innerHTML = JSON.stringify(array.invert());
+			document.getElementById('ascend').innerHTML = JSON.stringify(array.ascend(key));
+			document.getElementById('descend').innerHTML = JSON.stringify(array.descend(key));
+			document.getElementById('randomize').innerHTML = JSON.stringify(array.randomize());
+			document.getElementById('random').innerHTML = JSON.stringify(array.random());
+			document.getElementById('convertToObject').innerHTML = JSON.stringify(array.convertToObject(key));
+			document.getElementById('groupObjects').innerHTML = JSON.stringify(array.groupObjects([
+  				function(o){ return o[key][0] === 'P' },
+  				function(o){ return o[key][0] === 'A' }
+			]));
+		};
+	</script>
+	<style>b { font-size: 1.3em; } * { font-family: monospace; }</style>
+</head>
 <body>
-  key = <span id="divkey"></span>
+	<p>
+		a working demo. to see source code visit the <a href="https://github.com/obedm503/dollar-array/">github repo</a>.
+		<br />
+		you can find the docs <a href="https://obedm503.github.io/bootmark/?fetch=https://obedm503.github.io/dollar-array/DOCS.md">here</a>.
+		<br />
+		and the changelog <a href="https://obedm503.github.io/bootmark/?fetch=https://obedm503.github.io/dollar-array/CHANGELOG.md">here</a>.
+	</p>
+  <b>key</b>
+	<div id="key"></div>
   <br />
-  <br />
-  $array.keyExists()
+	<b>original array</b>
+	<div id="original"></div>
+	<br />
+  <b>$array().keyExists()</b>
   <div id="keyExists"></div>
   <br />
-  $array.filterByKey()
+  <b>$array.filterByKey()</b>
   <div id="filterByKey"></div>
+	<br />
+  <b>$array.invert()</b>
+  <div id="invert"></div>
   <br />
-  $array.reverse()
-  <div id="reverse"></div>
+  <b>$array.ascend()</b>
+  <div id="ascend"></div>
   <br />
-  $array.sortAscend()
-  <div id="sortAscend"></div>
+  <b>$array.descend()</b>
+  <div id="descend"></div>
   <br />
-  $array.sortDescend()
-  <div id="sortDescend"></div>
+  <b>$array.randomize()</b>
+  <div id="randomize"></div>
   <br />
-  $array.sortRandom()
-  <div id="sortRandom"></div>
+  <b>$array.random()</b>
+  <div id="random"></div>
   <br />
-  $array.convertToObject()
+  <b>$array.convertToObject()</b>
   <div id="convertToObject"></div>
   <br />
-  $array.groupObjects()
+  <b>$array.groupObjects()</b>
   <div id="groupObjects"></div>
 </body>

@@ -20,7 +20,9 @@ gulp.task('js', function(){
 
 gulp.task('docs', function () {
  return gulp.src(paths.js)
-   .pipe(gulpJsdoc2md())
+   .pipe(gulpJsdoc2md({
+		 private:true
+	 }))
    .pipe(rename('DOCS.md'))
    .pipe(gulp.dest('./'));
 });
