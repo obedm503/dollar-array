@@ -1,46 +1,43 @@
 <a name="$array"></a>
 
-## $array(array) ⇒ <code>Array</code>
-adds helpful methods to an array's prototype. Intended to be used **without** the ``new`` keyword, but still seems work with it. Can be used through ``$array`` or through ``$a``. If one of the methods returns an array, that array inherits all of $array's methods: they're chainable.
+## `$array(array)` ⇒ <code>[$array](#$array)</code>
+adds helpful methods to an array. Intended to be used **without** the `new` keyword, but still works with it. Can be used through `$array` or through `$a`. If one of the methods returns an array, that array inherits all of $array's methods: they're chainable.
 
 **Kind**: global function  
-**Returns**: <code>Array</code> - same array passed but with added methods to the its prototype  
+**Extends:** <code>Array</code>  
+**Returns**: <code>[$array](#$array)</code> - same array passed but with added methods AKA an $array.  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| array | <code>Array.&lt;Object&gt;</code> | An array, generally of objects. |
+| array | <code>Array</code> | An array, generally of objects. |
 
 **Example**  
 ```js
-var exampleArray = [  { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },  { name: "John", lastname: "Doe", user_id:"6789", age:40 },  { name: "Pedro", lastname: "Algo", age:30  }];$array(exampleArray);// ornew $array(exampleArray);// or$a(exampleArray);// ornew $a(exampleArray);
+var exampleArray = [  { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },  { name: "John", lastname: "Doe", user_id:"6789", age:40 },  { name: "Pedro", lastname: "Algo", age:30  }];$array(exampleArray);// or$a(exampleArray);
 ```
 
-* [$array(array)](#$array) ⇒ <code>Array</code>
-    * [.sort()](#$array.sort) ℗
-    * [.keyExists(key)](#$array.keyExists) ⇒ <code>Boolean</code>
-    * [.filterByKey(key, [newKey])](#$array.filterByKey) ⇒ <code>Array.&lt;Object&gt;</code>
-    * [.invert([transform])](#$array.invert) ⇒ <code>Array</code>
-    * [.randomize()](#$array.randomize) ⇒ <code>Array</code>
-    * [.random()](#$array.random) ⇒ <code>Object</code>
-    * [.ascend(key)](#$array.ascend) ⇒ <code>Array.&lt;Object&gt;</code>
-    * [.descend(key)](#$array.descend) ⇒ <code>Array.&lt;Object&gt;</code>
-    * [.convertToObject(key)](#$array.convertToObject) ⇒ <code>Object</code>
-    * [.groupObjects(conds)](#$array.groupObjects) ⇒ <code>Array.&lt;Array&gt;</code>
+* [`$array(array)`](#$array) ⇒ <code>[$array](#$array)</code>
+    * _instance_
+        * [`.keyExists(key)`](#$array+keyExists) ⇒ <code>Boolean</code>
+        * [`.filterByKey(oldKey, [newKey])`](#$array+filterByKey) ⇒ <code>[$array](#$array)</code>
+        * [`.invert([useNewArr])`](#$array+invert) ⇒ <code>[$array](#$array)</code>
+        * [`.randomize([useNewArr])`](#$array+randomize) ⇒ <code>[$array](#$array)</code>
+        * [`.random()`](#$array+random) ⇒ <code>Object</code>
+        * [`.ascend(key, [useNewArr])`](#$array+ascend) ⇒ <code>[$array](#$array)</code>
+        * [`.descend(key, [useNewArr])`](#$array+descend) ⇒ <code>[$array](#$array)</code>
+        * [`.toObject(key)`](#$array+toObject) ⇒ <code>Object</code>
+        * [`.group(conds)`](#$array+group) ⇒ <code>[$array](#$array)</code> &#124; <code>Object</code>
+    * _static_
+        * [`.version`](#$array.version)
+        * [`.isArray(arr)`](#$array.isArray) ⇒ <code>Boolean</code>
 
-<a name="$array.sort"></a>
+<a name="$array+keyExists"></a>
 
-### $array.sort() ℗
-helper function used by [$array().ascend](#$array.ascend) and [$array().descend](#$array.descend)
+### `$array.keyExists(key)` ⇒ <code>Boolean</code>
+checks if a certain property exists in ANY object in the array.
 
-**Kind**: static method of <code>[$array](#$array)</code>  
-**Access:** private  
-<a name="$array.keyExists"></a>
-
-### $array.keyExists(key) ⇒ <code>Boolean</code>
-checks if a certain key exists within ANY object in the array.
-
-**Kind**: static method of <code>[$array](#$array)</code>  
-**Returns**: <code>Boolean</code> - whether the key exists within any object in the array. Returns true even if the key only exists within one object in the whole array.  
+**Kind**: instance method of <code>[$array](#$array)</code>  
+**Returns**: <code>Boolean</code> - whether the key exists within any object in the array. Returns true even as soon as the key is found.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -50,99 +47,106 @@ checks if a certain key exists within ANY object in the array.
 ```js
 var exampleArray = [  { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },  { name: "John", lastname: "Doe", user_id:"6789", age:40 },  { name: "Pedro", lastname: "Algo", age:30  }];$array(exampleArray).keyExists('user_id'); //true
 ```
-<a name="$array.filterByKey"></a>
+<a name="$array+filterByKey"></a>
 
-### $array.filterByKey(key, [newKey]) ⇒ <code>Array.&lt;Object&gt;</code>
-method which takes a key and removes all other key-value pairs in the objects. Useful with dynamic ionic actionsheet buttons.
+### `$array.filterByKey(oldKey, [newKey])` ⇒ <code>[$array](#$array)</code>
+method which takes a key and removes all other key-value pairs in the objects. If a `newKey` is provided, it will substitute the `oldKey`. It skips objects whose value for that key is undefined. Useful with dynamic ionic actionsheet buttons.
 
-**Kind**: static method of <code>[$array](#$array)</code>  
-**Returns**: <code>Array.&lt;Object&gt;</code> - An array of objects, each with a single key-value pair.  
+**Kind**: instance method of <code>[$array](#$array)</code>  
+**Returns**: <code>[$array](#$array)</code> - An array of objects, each with a single key-value pair.  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| key | <code>string</code> | The key to look for in each object. |
-| [newKey] | <code>string</code> | Optional. The key to substitute the old key with... if that makes sense. |
+| oldKey | <code>String</code> | The key to look for in each object. |
+| [newKey] | <code>String</code> | Optional. The key to substitute the old key with |
 
 **Example**  
 ```js
-var exampleArray = [  { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },  { name: "John", lastname: "Doe", user_id:"6789", age:40 },  { name: "Pedro", lastname: "Algo", age:30  }];var array = $array(exampleArray);array.filterByKey('user_id'); //[{user_id:"1234"}, {user_id:"6789"}]array.filterByKey('user_id','id'); //[{id:"1234"}, {id:"6789"}]
+var exampleArray = [  { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },  { name: "John", lastname: "Doe", user_id:"6789", age:40 },  { name: "Pedro", lastname: "Algo", age:30  }];var array = $array(exampleArray);array.filterByKey('name'); //[{name:"Juan"},{name:"John"},{name:"Pedro"}]array.filterByKey('user_id'); //[{user_id:"1234"}, {user_id:"6789"}]array.filterByKey('user_id','id'); //[{id:"1234"}, {id:"6789"}]
 ```
-<a name="$array.invert"></a>
+<a name="$array+invert"></a>
 
-### $array.invert([transform]) ⇒ <code>Array</code>
-Reverses the order of items in an array. It's supposed to be faster than the Array.prototype.reverse() method.
+### `$array.invert([useNewArr])` ⇒ <code>[$array](#$array)</code>
+Reverses the order of items in an array. It's supposed to be faster than the Array#reverse() method.
 
-**Kind**: static method of <code>[$array](#$array)</code>  
-**Returns**: <code>Array</code> - The reversed array.  
+**Kind**: instance method of <code>[$array](#$array)</code>  
+**Returns**: <code>[$array](#$array)</code> - The reversed array.  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
-| [transform] | <code>Boolean</code> | <code>false</code> | whether to transform the original array. defaults to ``false``. |
+| [useNewArr] | <code>Boolean</code> | <code>false</code> | whether to modify $array called upon or return a copy. |
 
 **Example**  
 ```js
-var exampleArray = [  { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },  { name: "John", lastname: "Doe", user_id:"6789", age:40 },  { name: "Pedro", lastname: "Algo", age:30  }];$array(exampleArray).invert();//[// { name: "Pedro", lastname: "Algo", age:30  }// { name: "John", lastname: "Doe", user_id:"6789", age:40 },// { name: "Juan", lastname: "Perez", user_id:"1234", age:42 }//]
+var exampleArray = [  { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },  { name: "John", lastname: "Doe", user_id:"6789", age:40 },  { name: "Pedro", lastname: "Algo", age:30  }];$array(exampleArray).invert();// [//   {"name":"Pedro","lastname":"Algo","age":30},//   {"name":"John","lastname":"Doe","user_id":"6789","age":40},//   {"name":"Juan","lastname":"Perez","user_id":"1234","age":42}// ]
 ```
-<a name="$array.randomize"></a>
+<a name="$array+randomize"></a>
 
-### $array.randomize() ⇒ <code>Array</code>
-Randomizes the order of item in the array. Uses the knuth-shuffle.
+### `$array.randomize([useNewArr])` ⇒ <code>[$array](#$array)</code>
+Randomizes the order of item in the array. Uses the knuth shuffle.
 
-**Kind**: static method of <code>[$array](#$array)</code>  
-**Returns**: <code>Array</code> - randomized array.  
+**Kind**: instance method of <code>[$array](#$array)</code>  
+**Returns**: <code>[$array](#$array)</code> - randomized array.  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [useNewArr] | <code>Boolean</code> | <code>false</code> | whether to modify $array called upon or return a copy. |
+
 **Example**  
 ```js
 var exampleArray = [  { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },  { name: "John", lastname: "Doe", user_id:"6789", age:40 },  { name: "Pedro", lastname: "Algo", age:30  }];$array(exampleArray).randomize(); //randomized array...
 ```
-<a name="$array.random"></a>
+<a name="$array+random"></a>
 
-### $array.random() ⇒ <code>Object</code>
-returns a random element in an array. Adds an ``index`` property to the element's prototype corresponding to this element's index in the original array.
+### `$array.random()` ⇒ <code>Object</code>
+returns a random element in an array. Adds an `index` property to that element with the index that element had in the array.
 
-**Kind**: static method of <code>[$array](#$array)</code>  
+**Kind**: instance method of <code>[$array](#$array)</code>  
 **Returns**: <code>Object</code> - random element in array, **NOT AN ARRAY**, unless an array of arrays was passed.  
 **Example**  
 ```js
 var exampleArray = [  { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },  { name: "John", lastname: "Doe", user_id:"6789", age:40 },  { name: "Pedro", lastname: "Algo", age:30  }];$array(exampleArray).random(); // a random element...
 ```
-<a name="$array.ascend"></a>
+<a name="$array+ascend"></a>
 
-### $array.ascend(key) ⇒ <code>Array.&lt;Object&gt;</code>
+### `$array.ascend(key, [useNewArr])` ⇒ <code>[$array](#$array)</code>
 sorts the objects in an array in ascending alphabetical order according to the passed key's value. Also works if the key's value is a number.
 
-**Kind**: static method of <code>[$array](#$array)</code>  
-**Returns**: <code>Array.&lt;Object&gt;</code> - sorted array  
+**Kind**: instance method of <code>[$array](#$array)</code>  
+**Returns**: <code>[$array](#$array)</code> - sorted array  
 
-| Param | Type | Description |
-| --- | --- | --- |
-| key | <code>String</code> &#124; <code>Number</code> | The key with which to sort the array |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| key | <code>String</code> &#124; <code>Number</code> |  | The key with which to sort the array |
+| [useNewArr] | <code>Boolean</code> | <code>false</code> | whether to modify $array called upon or return a copy. |
 
 **Example**  
 ```js
 var exampleArray = [  { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },  { name: "John", lastname: "Doe", user_id:"6789", age:40 },  { name: "Pedro", lastname: "Algo", age:30  }];$array(exampleArray).ascend('lastname');//[//  { name: "Pedro", lastname: "Algo", age:30  },//  { name: "John", lastname: "Doe", user_id:"6789", age:40 },//  { name: "Juan", lastname: "Perez", user_id:"1234", age:42 }//]$array(exampleArray).ascend('age');//[//  { name: "Pedro", lastname: "Algo", age:30  },//  { name: "John", lastname: "Doe", user_id:"6789", age:40 },//  { name: "Juan", lastname: "Perez", user_id:"1234", age:42 }//]
 ```
-<a name="$array.descend"></a>
+<a name="$array+descend"></a>
 
-### $array.descend(key) ⇒ <code>Array.&lt;Object&gt;</code>
+### `$array.descend(key, [useNewArr])` ⇒ <code>[$array](#$array)</code>
 sorts the elements in an array in reverse/descending alphabetical order according to the passed key's value. Also works if the key's value is a number.
 
-**Kind**: static method of <code>[$array](#$array)</code>  
-**Returns**: <code>Array.&lt;Object&gt;</code> - sorted array  
+**Kind**: instance method of <code>[$array](#$array)</code>  
+**Returns**: <code>[$array](#$array)</code> - sorted array  
 
-| Param | Type | Description |
-| --- | --- | --- |
-| key | <code>String</code> &#124; <code>Number</code> | The key with which to sort the array. |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| key | <code>String</code> &#124; <code>Number</code> |  | The key with which to sort the array. |
+| [useNewArr] | <code>Boolean</code> | <code>false</code> | whether to modify $array called upon or return a copy. |
 
 **Example**  
 ```js
 var exampleArray = [  { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },  { name: "John", lastname: "Doe", user_id:"6789", age:40 },  { name: "Pedro", lastname: "Algo", age:30  }];$array(exampleArray).descend('lastname');//[//  { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },//  { name: "John", lastname: "Doe", user_id:"6789", age:40 },//  { name: "Pedro", lastname: "Algo", age:30  }//]$array(exampleArray).descend('age');//[//  { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },//  { name: "John", lastname: "Doe", user_id:"6789", age:40 },//  { name: "Pedro", lastname: "Algo", age:30  }//]
 ```
-<a name="$array.convertToObject"></a>
+<a name="$array+toObject"></a>
 
-### $array.convertToObject(key) ⇒ <code>Object</code>
-converts an array of objects to an object. Designed with the idea of eliminating the need to loop through an array in order to get a specific object.
+### `$array.toObject(key)` ⇒ <code>Object</code>
+converts an array of objects to an object. Designed with the idea of eliminating the need to loop through an array in order to get a specific object. Does not modidy $array it was called upon.
 
-**Kind**: static method of <code>[$array](#$array)</code>  
+**Kind**: instance method of <code>[$array](#$array)</code>  
 **Returns**: <code>Object</code> - Returns the array of objects converted into an object.  
 
 | Param | Type | Description |
@@ -151,21 +155,49 @@ converts an array of objects to an object. Designed with the idea of eliminating
 
 **Example**  
 ```js
-var exampleArray = [  { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },  { name: "John", lastname: "Doe", user_id:"6789", age:40 },  { name: "Pedro", lastname: "Algo", age:30  }];$array(exampleArray).convertToObject('lastname');//{//  "Perez": { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },//  "Doe": { name: "John", lastname: "Doe", user_id:"6789", age:40 },//  "Algo": { name: "Pedro", lastname: "Algo", age:30  }//}
+var exampleArray = [  { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },  { name: "John", lastname: "Doe", user_id:"6789", age:40 },  { name: "Pedro", lastname: "Algo", age:30  }];$array(exampleArray).toObject('lastname');//{//  "Perez": { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },//  "Doe": { name: "John", lastname: "Doe", user_id:"6789", age:40 },//  "Algo": { name: "Pedro", lastname: "Algo", age:30  }//}
 ```
-<a name="$array.groupObjects"></a>
+<a name="$array+group"></a>
 
-### $array.groupObjects(conds) ⇒ <code>Array.&lt;Array&gt;</code>
-takes an array of functions that each return conditionals. Inspired after the [Array.prototype.filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) method. Check the [StackOverflow question](http://stackoverflow.com/questions/38559281/array-filter-with-more-than-one-conditional).
+### `$array.group(conds)` ⇒ <code>[$array](#$array)</code> &#124; <code>Object</code>
+takes an array of functions that each return conditionals. Inspired after the [Array#filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) method. Check the [StackOverflow question](http://stackoverflow.com/questions/38559281/array-filter-with-more-than-one-conditional).
 
-**Kind**: static method of <code>[$array](#$array)</code>  
-**Returns**: <code>Array.&lt;Array&gt;</code> - An array of arrays with the objects grouped in the same order according to the array of callbacks passed. All objects which match no conditional, are grouped on the last array.  
+**Kind**: instance method of <code>[$array](#$array)</code>  
+**Returns**: <code>[$array](#$array)</code> &#124; <code>Object</code> - A new $array or an object, depending on whether the conditionals were an array or an object. The array of arrays has the elements grouped in the same order according to the array of callbacks passed. All elements which match no conditional, are grouped on the last array or in the `"unmatched"` array if conditionals were an object. Does not modidy $array it was called upon.  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| conds | <code>Array.&lt;callback&gt;</code> | An array of callback functions which each take an object and return a conditional value. |
+| conds | <code>Array.&lt;callback&gt;</code> &#124; <code>Object</code> | An array of callback functions which each take an object and return a conditional value. |
 
 **Example**  
 ```js
-var exampleArray = [  { name: "Juan", lastname: "Perez", user_id:"1234", age:42},  { name: "John", lastname: "Doe", user_id:"6789", age:40},  { name: "Pedro", lastname: "Algo", age:30}];$array(exampleArray).groupObjects([  function(o){ return o.lastname === 'Doe'; },  function(o){ return o.age > 35; }]);//[//  [//    { name: "John", lastname: "Doe", user_id:"6789", age:40 }//  ],//  [//    { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },//    { name: "John", lastname: "Doe", user_id:"6789", age:40 }//  ],//  [//    { name: "Pedro", lastname: "Algo", age:30 }//  ]//]
+var exampleArray = [  { name: "Juan", lastname: "Perez", user_id:"1234", age:42},  { name: "John", lastname: "Doe", user_id:"6789", age:40},  { name: "Pedro", lastname: "Algo", age:30}];var array = $array(exampleArray);array.group([  (o)=> o.lastname === 'Doe',  (o)=> o.age > 35]);//[//  [//    { name: "John", lastname: "Doe", user_id:"6789", age:40 }//  ],//  [//    { name: "Juan", lastname: "Perez", user_id:"1234", age:42 },//    { name: "John", lastname: "Doe", user_id:"6789", age:40 }//  ],//  [//    { name: "Pedro", lastname: "Algo", age:30 }//  ]//]array.group({  Doe: (o)=> o.lastname === 'Doe',  35: (o)=> o.age > 35});// {//   35: [//     {"name":"John","lastname":"Doe","user_id":"6789","age":40},//     {"name":"Juan","lastname":"Perez","user_id":"1234","age":42}//   ],//   Doe: [//     {"name":"John","lastname":"Doe","user_id":"6789","age":40}//   ],//   unmatched: [//     {"name":"Pedro","lastname":"Algo","age":30}//   ]// }
+```
+<a name="$array.version"></a>
+
+### `$array.version`
+current version of $array.
+
+**Kind**: static property of <code>[$array](#$array)</code>  
+**Properties**
+
+| Name |
+| --- |
+| version |
+
+<a name="$array.isArray"></a>
+
+### `$array.isArray(arr)` ⇒ <code>Boolean</code>
+checks whether an array is a $array
+
+**Kind**: static method of <code>[$array](#$array)</code>  
+**Returns**: <code>Boolean</code> - whether the param is an $array  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| arr | <code>Array</code> | to check |
+
+**Example**  
+```js
+$array.isArray($array());// true$array.isArray([]); // false
 ```

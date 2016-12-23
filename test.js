@@ -10,17 +10,26 @@ exampleArray = [
 ],
 array = $array(exampleArray);
 
-console.log('key: ', `"${key}"`);
-console.log('exampleArray: ', exampleArray);
-console.log('keyExists: ', array.keyExists(key));
-console.log('filterByKey: ', array.filterByKey(key));
-console.log('invert: ', array.invert());
-console.log('ascend: ', array.ascend(key));
-console.log('descend: ', array.descend(key));
-console.log('randomize: ', array.randomize());
-console.log('random: ', array.random());
-console.log('convertToObject: ', array.convertToObject(key));
-console.log('groupObjects: ', array.groupObjects([
-	o => o[key][0] === 'P',
-	o => o[key][0] === 'A'
+function log(word, arr){
+  console.log(`${ word }: \n--------------\n\n${ JSON.stringify(arr, null, 2) } \n\n`)
+}
+
+
+log(`key`, key);
+log(`exampleArrayl`, exampleArray);
+log(`keyExists("${key}")`, array.keyExists(key));
+log(`filterByKey("${key}")`, array.filterByKey(key));
+log(`invert()`, array.invert(true));
+log(`ascend("${key}")`, array.ascend(key, true));
+log(`descend("${key}")`, array.descend(key, true));
+log(`randomize()`, array.randomize(true));
+log(`random()`, array.random());
+log(`toObject("${key}")`, array.toObject(key));
+log(`group([])`, array.group([
+  o => o[key][0] === 'A',
+  o => o[key][0] === 'P'
 ]));
+log(`group({})`, array.group({
+  A: o => o[key][0] === 'A',
+  P: o => o[key][0] === 'P'
+}));
