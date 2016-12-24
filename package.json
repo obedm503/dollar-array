@@ -3,7 +3,7 @@
   "repository": "git:https://github.com/obedm503/dollar-array.git",
   "version": "2.0.0",
   "description": "A tiny utility library for working with arrays.",
-  "main": "./src/$array.js",
+  "main": "./dist/$array.min.js",
   "author": "obedm503",
   "license": "MIT",
   "devDependencies": {
@@ -14,7 +14,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^2.0.0",
     "gulp-util": "^3.0.7",
-    "jsdoc-to-markdown": "^1.3.7"
+    "jsdoc-to-markdown": "^1.3.9"
   },
   "dependencies": {},
   "scripts": {

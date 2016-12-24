@@ -38,8 +38,9 @@
   <script>
     $.fn.bootmark.options = { html: { toc: false }, showdown: { extensions: ['fix-markdown'] } };
     var key = 'lastname',
-    filterByKey,
+    filterByProp,
     simple,
+    array,
     exampleArray = [
       { "name": "Juan", "lastname": "Perez", "user_id":"1234", "age":42 },
       { "name": "John", "lastname": "Doe", "user_id":"6789", "age":40 },
@@ -50,7 +51,8 @@
       $('#'+ elementId).html('<code class="js language-js">' + inner + '</code>');
     }
     window.onload = function(){
-      window.array = $array(exampleArray);
+      array = $array(exampleArray.slice(0));
+      console.log('exampleArray: ', exampleArray);
       console.log('array: ', array);
       $('.key').html('"' + key + '"');
 
@@ -60,8 +62,8 @@
       };
 
       formatArray('original', exampleArray);
-      formatArray('keyExists', array.keyExists(key));
-      formatArray('filterByKey', array.filterByKey(key));
+      formatArray('propExists', array.propExists(key));
+      formatArray('filterByProp', array.filterByProp(key, null, true));
       formatArray('invert', array.invert(true));
       formatArray('ascend', array.ascend(key, true));
       formatArray('descend', array.descend(key, true));
@@ -120,7 +122,7 @@
     }
   </style>
   <span id="top"></span>
-  <bootmark fetch="README.md"></bootmark>
+  <bootmark fetch="['README.md','DOCS.md']"></bootmark>
   <div class="container">
     <div class="row">
       <div class="bootmark-main">
@@ -128,18 +130,18 @@
         <h2>Demo</h2>
         <h4>Click <a href="https://github.com/obedm503/dollar-array/">HERE</a> to view the souce</h4>
         <p>
-          This demo is dynamic. Every time the page loads the results you see are generated. You'll notice that the <a href="#randomizeTitle" class="page-scroll">randomize</a> result changes on every page load.
+          This demo is dynamic. Every time the page loads the results you see are generated. You'll notice that the <a href="#randomizeTitle" class="page-scroll">randomize</a> result changes on every page load. Also two global variables, "exampleArray" and "array", have been defined in case anyone wants to try $arrayJS in the browser console.
         </p>
         <b>key: </b> <span class="key str"></span>
         <hr />
         <b>original array</b>
         <pre class="prettyprint linenums" id="original"></pre>
         <hr />
-        <b>array.keyExists(<span class="key str"></span>)</b>
-        <pre class="prettyprint linenums" id="keyExists"></pre>
+        <b>array.propExists(<span class="key str"></span>)</b>
+        <pre class="prettyprint linenums" id="propExists"></pre>
         <hr />
-        <b>array.filterByKey(<span class="key str"></span>)</b>
-        <pre class="prettyprint linenums" id="filterByKey"></pre>
+        <b>array.filterByProp(<span class="key str"></span>)</b>
+        <pre class="prettyprint linenums" id="filterByProp"></pre>
         <hr />
         <b>array.invert(<span class="kwd">true</span>)</b>
         <pre class="prettyprint linenums" id="invert"></pre>
@@ -165,6 +167,6 @@
       </div>
     </div>
   </div>
-  <bootmark fetch="['DOCS.md','CHANGELOG.md']"></bootmark>
+  <bootmark fetch="CHANGELOG.md"></bootmark>
   <a id="to-top" href="#top" class="page-scroll btn btn-dark btn-lg" style="display: block; position: fixed;"><i class="fa fa-chevron-up fa-fw fa-1x"></i></a>
 </body>

@@ -1,7 +1,7 @@
 const $array = require('./dist/$array.min.js');
 
 var key = 'lastname',
-filterByKey,
+filterByProp,
 simple,
 exampleArray = [
 	{ "name": "Juan", "lastname": "Perez", "user_id":"1234", "age": 42 },
@@ -17,8 +17,8 @@ function log(word, arr){
 
 log(`key`, key);
 log(`exampleArrayl`, exampleArray);
-log(`keyExists("${key}")`, array.keyExists(key));
-log(`filterByKey("${key}")`, array.filterByKey(key));
+log(`propExists("${key}")`, array.propExists(key));
+log(`filterByProp("${key}")`, array.filterByProp(key));
 log(`invert()`, array.invert(true));
 log(`ascend("${key}")`, array.ascend(key, true));
 log(`descend("${key}")`, array.descend(key, true));
