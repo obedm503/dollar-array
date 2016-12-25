@@ -1,7 +1,7 @@
 <a name="$array"></a>
 
-## `$array(array)` ⇒ <code>[$array](#$array)</code>
-#### Syntax```js$array( element0, element1[, ...[, elementN]] )$array( [ element0, element1, ..., elementN ] )```An `$array` is simply an `Array` with extra methods. It is initialized  with the elements as parameters, except in the case where a single element of type `Array` is passed. Unlike `Array`, if a single integer is passed, `$array` will return an `$array` with the integer as it's sole element.```js$array(5) // pass single non-Array element, returns [ 5 ]$array( [2,5,6,4,3] ) // pass single Array element, returns [ 2, 5, 6, 4, 3 ]$array( 2, 5, 6, 4, 3 ) // pass multiple elements, returns [ 2, 5, 6, 4, 3 ]$array( [1,2,3,4], 5, 6, 4, 3 ) // pass multiple elements, still returns [ [1,2,3,4], 5, 6, 4, 3 ]````$array` is intended to be used **without** the `new` keyword because it doesn't return `this`. It can be used as `$array` or through the shortcut, `$a`. All methods that return `Array`s actually return `$array`s. That is to say that most methods are chainable.An `$array` is not *really* a subclass of `Array`. It's more of a *pseudo-subclass*. All `$array`s have the `$array.prototype` as well as the `Array.prototype` methods.>Remember: `$array`s are just `Array`s with a few extra and useful methods as properties.Becasue of the current lack of support for [JavaScript classes](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes), I was forced to find a workaround. I concluded in adding the `$array.prototype` methods as non-enumerable properties instead of modifying an `Array`'s `__proto__` property for performance and support reasons explained [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/The_performance_hazards_of__%5B%5BPrototype%5D%5D_mutation). In the future, when support for `class` and `extends` is wide, another rewrite will happen. Native code is a lot faster than workarounds. Also, you might ask: why not just use Babel and transpile the `class` syntax? Well, it turns out that extending `Array` is the one thing that Babel still can't do whilst maintaining the [exotic nature](http://www.ecma-international.org/ecma-262/6.0/#sec-array-exotic-objects) of `Array`s.<br><br>In case you are interested in calling one of the methods whithout "instantiating" an `$array` you may do so using `Function.prototype.call` or `Function.prototype.apply` on the functions in `$array.prototype`.```js$array.prototype.invert.call([1,2,3,4]) // returns [4,3,2,1] an Array and not an $array$array.prototype.invert.call([1,2,3,4], true) // returns [4,3,2,1] an $array```#### DemoThrough this documentation, a common example `Array` will be used. It is special because it is composed of objects. All objects share most property names except for the third element which doesn't have a `user_id` property. Also two `global` variables, `exampleArray` and `array`, have been defined in case anyone wants to try `$array` in the browser console.```jsvar exampleArray = [ { name: "Juan", lastname: "Perez", user_id:"1234", age:42 }, { name: "John", lastname: "Doe", user_id:"6789", age:40 }, { name: "Pedro", lastname: "Algo", age:30  }];var array = $array(exampleArray.slice(0)); // .slice(0) removes reference to original Array```> Fun Fact: $arrayJS adds a single function to the `Array.prototype`, `Array.prototype.to$array`. It's just another way to convert an `Array` to an `$array`.
+## $array(array) ⇒ <code>[$array](#$array)</code>
+#### Syntax```js$array( element0, element1[, ...[, elementN]] )$array( [ element0, element1, ..., elementN ] )```An `$array` is simply an `Array` with extra methods. It is initialized  with the elements as parameters, except in the case where a single element of type `Array` is passed. Unlike `Array`, if a single integer is passed, `$array` will return an `$array` with the integer as it's sole element.```js$array(5) // pass single non-Array element, returns [ 5 ]$array( [2,5,6,4,3] ) // pass single Array element, returns [ 2, 5, 6, 4, 3 ]$array( 2, 5, 6, 4, 3 ) // pass multiple elements, returns [ 2, 5, 6, 4, 3 ]$array( [1,2,3,4], 5, 6, 4, 3 ) // pass multiple elements, still returns [ [1,2,3,4], 5, 6, 4, 3 ]````$array` is intended to be used **without** the `new` keyword because it doesn't return `this`. It can be used as `$array` or through the shortcut, `$a`. All methods that return `Array`s actually return `$array`s. That is to say that most methods are chainable.An `$array` is not *really* a subclass of `Array`. It's more of a *pseudo-subclass*. All `$array`s have the `$array.prototype` as well as the `Array.prototype` methods.>Remember: `$array`s are just `Array`s with a few extra and useful methods as properties.Becasue of the current lack of support for [JavaScript classes](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes), I was forced to find a workaround. I concluded in adding the `$array.prototype` methods as non-enumerable properties instead of modifying an `Array`'s `__proto__` property for performance and support reasons explained [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/The_performance_hazards_of__%5B%5BPrototype%5D%5D_mutation). In the future, when support for `class` and `extends` is wide, another rewrite will happen. Native code is a lot faster than workarounds. Also, you might ask: why not just use Babel and transpile the `class` syntax? Well, it turns out that extending `Array` is the one thing that Babel still can't do whilst maintaining the [exotic nature](http://www.ecma-international.org/ecma-262/6.0/#sec-array-exotic-objects) of `Array`s.<br><br>In case you are interested in calling one of the methods whithout "instantiating" an `$array` you may do so using `Function.prototype.call` or `Function.prototype.apply` on the functions in `$array.prototype`.```js$array.prototype.invert.call([1,2,3,4]) // returns [4,3,2,1] an Array and not an $array$array.prototype.invert.call([1,2,3,4], true) // returns [4,3,2,1] an $array```#### DemoThrough this documentation, a common example `Array` will be used. It is special because it is composed of objects. All objects share most property names except for the third element which doesn't have a `user_id` property.```jsvar exampleArray = [ { name: "Juan", lastname: "Perez", user_id:"1234", age:42 }, { name: "John", lastname: "Doe", user_id:"6789", age:40 }, { name: "Pedro", lastname: "Algo", age:30  }];var array = $array(exampleArray.slice(0)); // .slice(0) removes reference to original Array```> Fun Fact: $arrayJS adds a single function to the `Array.prototype`, `Array.prototype.to$array`. It's just another way to convert an `Array` to an `$array`.
 
 **Kind**: global function  
 **Extends:** <code>Array</code>  
@@ -12,24 +12,24 @@
 | array | <code>Array</code> &#124; <code>any</code> | A single `Array` or *n* elements |
 
 
-* [`$array(array)`](#$array) ⇒ <code>[$array](#$array)</code>
+* [$array(array)](#$array) ⇒ <code>[$array](#$array)</code>
     * _instance_
-        * [`.propExists(property)`](#$array+propExists) ⇒ <code>Boolean</code>
-        * [`.filterByProp(oldKey, [newKey], [useNewArr])`](#$array+filterByProp) ⇒ <code>[$array](#$array)</code>
-        * [`.invert([useNewArr])`](#$array+invert) ⇒ <code>[$array](#$array)</code>
-        * [`.randomize([useNewArr])`](#$array+randomize) ⇒ <code>[$array](#$array)</code>
-        * [`.random()`](#$array+random) ⇒ <code>Object</code>
-        * [`.ascend(property, [useNewArr])`](#$array+ascend) ⇒ <code>[$array](#$array)</code>
-        * [`.descend(key, [useNewArr])`](#$array+descend) ⇒ <code>[$array](#$array)</code>
-        * [`.toObject(property)`](#$array+toObject) ⇒ <code>Object</code>
-        * [`.group(conds, thisArg, ...otherArgs)`](#$array+group) ⇒ <code>[$array](#$array)</code> &#124; <code>Object</code>
+        * [.propExists(property)](#$array+propExists) ⇒ <code>Boolean</code>
+        * [.filterByProp(oldKey, [newKey], [useNewArr])](#$array+filterByProp) ⇒ <code>[$array](#$array)</code>
+        * [.invert([useNewArr])](#$array+invert) ⇒ <code>[$array](#$array)</code>
+        * [.randomize([useNewArr])](#$array+randomize) ⇒ <code>[$array](#$array)</code>
+        * [.random()](#$array+random) ⇒ <code>Object</code>
+        * [.ascend(property, [useNewArr])](#$array+ascend) ⇒ <code>[$array](#$array)</code>
+        * [.descend(key, [useNewArr])](#$array+descend) ⇒ <code>[$array](#$array)</code>
+        * [.toObject(property)](#$array+toObject) ⇒ <code>Object</code>
+        * [.group(conds, thisArg, ...otherArgs)](#$array+group) ⇒ <code>[$array](#$array)</code> &#124; <code>Object</code>
     * _static_
-        * [`.version`](#$array.version)
-        * [`.isArray(arr)`](#$array.isArray) ⇒ <code>Boolean</code>
+        * [.version](#$array.version)
+        * [.isArray(arr)](#$array.isArray) ⇒ <code>Boolean</code>
 
 <a name="$array+propExists"></a>
 
-### `$array.propExists(property)` ⇒ <code>Boolean</code>
+### $array.propExists(property) ⇒ <code>Boolean</code>
 The **propExists()** method checks if a *property* exists in ANY `element` in an `$array`.```js$array([1,2,3,'a string']).propExists('length') // returns "true" because strings have a "length" property```#### Syntax```jsarr.propExists(property)```
 
 **Kind**: instance method of <code>[$array](#$array)</code>  
@@ -45,7 +45,7 @@ var exampleArray = [  { name: "Juan", lastname: "Perez", user_id:"1234", age:42
 ```
 <a name="$array+filterByProp"></a>
 
-### `$array.filterByProp(oldKey, [newKey], [useNewArr])` ⇒ <code>[$array](#$array)</code>
+### $array.filterByProp(oldKey, [newKey], [useNewArr]) ⇒ <code>[$array](#$array)</code>
 The **filterByProp()** method takes a key and removes all other key-value pairs in the objects in the array. If a `newKey` is provided, it will substitute the `oldKey`. **filterByProp()** skips objects whose value for the given `oldKey` is `undefined`. [Useful with dynamic ionic actionsheet buttons.](https://github.com/ncai-developers/studentaccess/blob/master/components/homework/homework.controller.js#L42)```js$array({ type: 'car', year: 2014 }, { type: 'bike', year: 2015 }).filterByProp('type', 'vehicle')// [ {"vehicle":"car"}, {"vehicle":"bike"} ]```#### Syntax```jsarr.filterByProp(propertyName[, newPropertyName[, returnNew$array ]])```
 
 **Kind**: instance method of <code>[$array](#$array)</code>  
@@ -63,7 +63,7 @@ var exampleArray = [ { name: "Juan", lastname: "Perez", user_id:"1234", age:42 
 ```
 <a name="$array+invert"></a>
 
-### `$array.invert([useNewArr])` ⇒ <code>[$array](#$array)</code>
+### $array.invert([useNewArr]) ⇒ <code>[$array](#$array)</code>
 The **invert()** method reverses the order of an `$array`'s elements. It's supposed to be faster than the `Array.prototype.reverse()` method.```js$array(1,2,3,4,5).invert() // returns [5,4,3,2,1]```#### Syntax```jsarr.invert([useNewArr])```
 
 **Kind**: instance method of <code>[$array](#$array)</code>  
@@ -79,7 +79,7 @@ var exampleArray = [ { name: "Juan", lastname: "Perez", user_id:"1234", age:42 
 ```
 <a name="$array+randomize"></a>
 
-### `$array.randomize([useNewArr])` ⇒ <code>[$array](#$array)</code>
+### $array.randomize([useNewArr]) ⇒ <code>[$array](#$array)</code>
 The **randomize()** method randomizes the order of elements in an `$array` using the [Knuth Shuffle](https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle) algorithm.```js$array(1,2,3,4).randomize() // returns random $array```#### Syntax```jsarr.randomize([useNewArray])```
 
 **Kind**: instance method of <code>[$array](#$array)</code>  
@@ -95,7 +95,7 @@ var exampleArray = [  { name: "Juan", lastname: "Perez", user_id:"1234", age:42
 ```
 <a name="$array+random"></a>
 
-### `$array.random()` ⇒ <code>Object</code>
+### $array.random() ⇒ <code>Object</code>
 The **random()** method returns a random element in an `$array`. Adds an `index` property to that element with the index that element had in the array if the element is not `number`, a `string`, a `boolean`, `undefined`, or `null`. It does not modify the original `$array`;```js$array(1,2,3,4).random() // returns a random number```#### Syntax```jsarr.random()```
 
 **Kind**: instance method of <code>[$array](#$array)</code>  
@@ -106,7 +106,7 @@ var exampleArray = [  { name: "Juan", lastname: "Perez", user_id:"1234", age:42
 ```
 <a name="$array+ascend"></a>
 
-### `$array.ascend(property, [useNewArr])` ⇒ <code>[$array](#$array)</code>
+### $array.ascend(property, [useNewArr]) ⇒ <code>[$array](#$array)</code>
 The **ascend()** method sorts the elements in an array in ascending alphabetical or numerical order according to the passed property's value.```js$array([ { type: 'car' }, { type: 'bike' } ]).ascend('type')// [ { type: 'bike' }, { type: 'car' } ]```#### Syntax```jsarr.ascend(propertyName[, useNewArr])```
 
 **Kind**: instance method of <code>[$array](#$array)</code>  
@@ -123,7 +123,7 @@ var exampleArray = [  { name: "Juan", lastname: "Perez", user_id:"1234", age:42
 ```
 <a name="$array+descend"></a>
 
-### `$array.descend(key, [useNewArr])` ⇒ <code>[$array](#$array)</code>
+### $array.descend(key, [useNewArr]) ⇒ <code>[$array](#$array)</code>
 The **descend()** method sorts the elements in an array in reverse/descending alphabetical/numerical order according to the passed property's value.```js$array([ { n: 2 }, { n: 8 } ]).descend('n')// [ { n: 8 }, { n: 2 } ]```#### Syntax```jsarr.descend(propertyName[, useNewArr])```
 
 **Kind**: instance method of <code>[$array](#$array)</code>  
@@ -140,7 +140,7 @@ var exampleArray = [  { name: "Juan", lastname: "Perez", user_id:"1234", age:42
 ```
 <a name="$array+toObject"></a>
 
-### `$array.toObject(property)` ⇒ <code>Object</code>
+### $array.toObject(property) ⇒ <code>Object</code>
 The **toObject()** converts an array of objects to an object literal. It was designed with the idea of eliminating the need to loop through an array in order to get a specific object. Does not modidy `$array` it was called on.```js$array([ { type: 'car', year: 2014 }, { type: 'bike', year: 2015 } ]).toObject('type')// { "bike": { "type":"bike", "year":2015 }, "car": { "type":"car", "year":2014 } }```#### Syntax```jsarr.toObject(propertyName)```
 
 **Kind**: instance method of <code>[$array](#$array)</code>  
@@ -156,7 +156,7 @@ var exampleArray = [ { name: "Juan", lastname: "Perez", user_id:"1234", age:42 
 ```
 <a name="$array+group"></a>
 
-### `$array.group(conds, thisArg, ...otherArgs)` ⇒ <code>[$array](#$array)</code> &#124; <code>Object</code>
+### $array.group(conds, thisArg, ...otherArgs) ⇒ <code>[$array](#$array)</code> &#124; <code>Object</code>
 The **group()** method takes an array or object with functions that each return conditionals. Inspired after the [Array.prototype.filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) method. Check the [StackOverflow question](http://stackoverflow.com/questions/38559281/array-filter-with-more-than-one-conditional).```js$array([1,2,3,4]).group([n=>x>2, n=>n<2]) // returns [ [3,4], [1], [2] ]$array([1,2,3,4]).group({"greater":n=>x>2,"less":n=>n<2]) // returns { "greater":[3,4], "less":[1], "unmatched":[2] }```#### Syntax```jsarr.group(conditionals)```
 
 **Kind**: instance method of <code>[$array](#$array)</code>  
@@ -174,13 +174,13 @@ var exampleArray = [ { name: "Juan", lastname: "Perez", user_id:"1234", age:42}
 ```
 <a name="$array.version"></a>
 
-### `$array.version`
+### $array.version
 current version of $arrayJS.
 
 **Kind**: static property of <code>[$array](#$array)</code>  
 <a name="$array.isArray"></a>
 
-### `$array.isArray(arr)` ⇒ <code>Boolean</code>
+### $array.isArray(arr) ⇒ <code>Boolean</code>
 checks whether an array is a $array
 
 **Kind**: static method of <code>[$array](#$array)</code>  

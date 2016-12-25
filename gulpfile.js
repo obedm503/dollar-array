@@ -29,12 +29,12 @@ gulp.task('docs', function () {
  return gulp.src(paths.js)
    .pipe(gulpJsdoc2md({
      //private:true,
-     'name-format': 'backtick'
+     //'name-format': 'backtick'
    }))
    .pipe(rename('DOCS.md'))
    .pipe(gulp.dest('./'));
 });
 
-gulp.task('serve', function(){
+gulp.task('watch', function(){
   gulp.watch(paths.js, ['docs','js']);
 });

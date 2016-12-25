@@ -585,9 +585,12 @@ if(typeof $array === 'undefined'){
     * @description `$array` instance methods. Inherits from `Array.prototype`. Added to allow people to use methods without "instantiating" a new `$array` using `Function#call` or `Function#apply`.
     */
     $array.prototype = Object.create(Array.prototype);
-    Object.keys(_public).forEach((key)=>{
+    let protoKeys = Object.keys(_public);
+    let i = protoKeys.length;
+    while(i--){
+      let key = protoKeys[i];
       $array.prototype[key] = _public[key].value;
-    });
+    }
 
     /**
     * @name version
