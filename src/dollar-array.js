@@ -1,5 +1,3 @@
-
-
 /**!
 * @file $arrayJS: a simple JavaScript utility library for working with arrays of objects. Now available as a node module.
 * @author [obedm503](https://github.com/obedm503/) <obedm503@gmail.com>

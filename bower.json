@@ -1,7 +1,7 @@
 {
   "name": "dollar-array",
   "description": "A tiny utility library for working with arrays [of objects].",
-  "main": "./dist/$array.js",
+  "main": "./dist/dollar-array.js",
   "authors": [
     "obedm503"
   ],
@@ -21,7 +21,8 @@
     "object",
 		"dollar-array",
 		"dollar",
-    "json"
+    "json",
+    "$array"
   ],
   "homepage": "https://github.com/obedm503/dollar-array",
   "ignore": [

@@ -3,7 +3,7 @@
   "repository": "git:https://github.com/obedm503/dollar-array.git",
   "version": "2.0.0",
   "description": "A tiny utility library for working with arrays.",
-  "main": "./dist/$array.min.js",
+  "main": "./dist/dollar-array.min.js",
   "author": "obedm503",
   "license": "MIT",
   "devDependencies": {

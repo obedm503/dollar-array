@@ -4,7 +4,7 @@ const gulpJsdoc2md = require('gulp-jsdoc-to-markdown');
 const uglify = require('gulp-uglify');
 const babel = require('gulp-babel');
 const paths = {
-        js: ['./src/$array.js']
+        js: ['./src/dollar-array.js']
       };
 
 gulp.task('default', ['docs','js']);

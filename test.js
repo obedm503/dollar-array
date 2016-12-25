@@ -1,4 +1,4 @@
-const $array = require('./dist/$array.min.js');
+const $array = require('./dist/dollar-array.min.js');
 
 var key = 'lastname',
 filterByProp,

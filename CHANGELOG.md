@@ -12,6 +12,12 @@ For some guidelines see [keepachangelog.com](https://keepachangelog.com/).
 - ...
 
 ----
+## 2.0.1 - 2016-12-25
+### Fixed
+- renamed `$array.js` file to `dollar-array.js`
+- renamed `$array.min.js` file to `dollar-array.min.js`
+
+----
 ## 2.0.0 - 2016-12-24
 ### Added
 - dollar-array is now a node module
