@@ -1,60 +1,172 @@
-<script src="dist/$array.min.js"></script>
-<script>
-  var hw,
-  key = 'calc_class',
-  filterByKey,
-  simple,
-  exampleArray = [
-    { name: "Juan", lastname: "Perez", user_id:"1234", age:42},
-    { name: "John", lastname: "Doe", user_id:"6789", age:40},
-    { name: "Pedro", lastname: "Algo", age:30}
-  ],
-  url = 'https://6ad81d6bd1586420daecb5b133f5e5685eeff289.googledrive.com/host/0B8QaOFt88YYmakRCNmpESlNYdTA/homework.json';
+<!DOCTYPE html5>
+<head>
+  <title>$array.js</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <style>
+  .github-corner:hover .octo-arm{ animation:octocat-wave 560ms ease-in-out }
+  @keyframes octocat-wave {
+    0%, 100% { transform:rotate(0) } 20%, 60% { transform:rotate(-25deg) } 40%, 80% {transform:rotate(10deg) }
+  }
+  @media(max-width:500px){
+    .github-corner:hover .octo-arm { animation:none } .github-corner .octo-arm { animation:octocat-wave 560ms ease-in-out }
+  }
+  #to-top { display: none; position: fixed; bottom: 5px; right: 5px; }
+  .btn-dark { border-radius: 0; color: #fff; background-color: rgba(69,130,236, 0.4); }
+  .btn-dark:hover, .btn-dark:focus, .btn-dark:active { color: #fff; background-color: rgba(69,130,236, 1); }
+  </style>
+  <script src="https://obedm503.github.io/bootmark/dist/bootmark.bundle.min.js"></script>
+  <script>
+    showdown.extension('fix-markdown', function () {
+      return [{
+        type: "lang",
+        regex: /<code>\[\~Darray\]\(#\~Darray\)<\/code>/gim,
+        replace: '[`$array`](#array)'
+      },{
+        type: "output",
+        filter: function(html, converter, options){
+          var $div = $('<div></div>').html(html);
 
-  fetch(url).then(function(data){
-    return data.json()
-  }).then(function(json){
-    hw = json;
-    filterByKey = $array.filterByKey(json)(key);
-    document.getElementById('divkey').innerHTML = key;
-    document.getElementById('keyExists').innerHTML = JSON.stringify($array.keyExists(json)(key));
-    document.getElementById('filterByKey').innerHTML = JSON.stringify(filterByKey);
-    document.getElementById('reverse').innerHTML = JSON.stringify($array.reverse(filterByKey));
-    document.getElementById('sortAscend').innerHTML = JSON.stringify($array.sortAscend(filterByKey)(key));
-    document.getElementById('sortDescend').innerHTML = JSON.stringify($array.sortDescend(filterByKey)(key));
-    document.getElementById('sortRandom').innerHTML = JSON.stringify($array.sortRandom(filterByKey));
-    document.getElementById('convertToObject').innerHTML = JSON.stringify($array.convertToObject(filterByKey)(key));
-    document.getElementById('groupObjects').innerHTML = JSON.stringify($array.groupObjects(filterByKey)([
-      function(o){ return o.calc_class[0] === 'P' },
-      function(o){ return o.calc_class[0] === 'A' }
-    ]));
-  });
-</script>
-<body>
-  key = <span id="divkey"></span>
-  <br />
-  <br />
-  $array.keyExists()
-  <div id="keyExists"></div>
-  <br />
-  $array.filterByKey()
-  <div id="filterByKey"></div>
-  <br />
-  $array.reverse()
-  <div id="reverse"></div>
-  <br />
-  $array.sortAscend()
-  <div id="sortAscend"></div>
-  <br />
-  $array.sortDescend()
-  <div id="sortDescend"></div>
-  <br />
-  $array.sortRandom()
-  <div id="sortRandom"></div>
-  <br />
-  $array.convertToObject()
-  <div id="convertToObject"></div>
-  <br />
-  $array.groupObjects()
-  <div id="groupObjects"></div>
+          $('a[name^="$"]', $div).each(function(){
+            var $this = $(this);
+            var name = $this.attr('name');
+            // remove $ from name
+            $this.attr('name', name.substring(1) );
+          });
+
+          $('a[href^="#$"]', $div).each(function(){
+            var $this = $(this);
+            var href = $this.attr('href');
+            // remove $ from href
+            $this.attr( 'href', '#' + href.substring(2) );
+          });
+
+          return $div.html();
+        }
+      }];
+    });
+  </script>
+  <script src="dist/$array.min.js"></script>
+  <script src="../experiments/es5-extend.js"></script>
+  <script>
+    $.fn.bootmark.options = { html: { toc: false }, showdown: { extensions: ['fix-markdown'] } };
+    var key = 'lastname',
+    filterByProp,
+    simple,
+    array,
+    exampleArray = [
+      { "name": "Juan", "lastname": "Perez", "user_id":"1234", "age":42 },
+      { "name": "John", "lastname": "Doe", "user_id":"6789", "age":40 },
+      { "name": "Pedro", "lastname": "Algo", "age":30 }
+    ];
+    function formatArray(elementId, array){
+      var inner = ( typeof array ==='string' )? array : JSON.stringify(array, null, 1);
+      $('#'+ elementId).html('<code class="js language-js">' + inner + '</code>');
+    }
+    window.onload = function(){
+      array = $array(exampleArray.slice(0));
+      console.log('exampleArray: ', exampleArray);
+      console.log('array: ', array);
+      $('.key').html('"' + key + '"');
+
+      var conditionals = {
+        P: function(o){ return o[key][0] === 'P' },
+        A: function(o){ return o[key][0] === 'A' }
+      };
+
+      formatArray('original', exampleArray);
+      formatArray('propExists', array.propExists(key));
+      formatArray('filterByProp', array.filterByProp(key, null, true));
+      formatArray('invert', array.invert(true));
+      formatArray('ascend', array.ascend(key, true));
+      formatArray('descend', array.descend(key, true));
+      formatArray('randomize', array.randomize(true));
+      formatArray('random', array.random());
+      formatArray('toObject', array.toObject(key));
+      formatArray('group', array.group(conditionals));
+    };
+    //#to-top button appears after scrolling
+    var fixed = false;
+    $(document).scroll(function scroll() {
+      if ($(this).scrollTop() > 250) {
+        if (!fixed) {
+          fixed = true;
+          // $('#to-top').css({position:'fixed', display:'block'});
+          $('#to-top').show("slow", function() {
+            $('#to-top').css({
+              position: 'fixed',
+              display: 'block'
+            });
+          });
+        }
+      } else {
+        if (fixed) {
+          fixed = false;
+          $('#to-top').hide("slow", function() {
+            $('#to-top').css({
+              display: 'none'
+            });
+          });
+        }
+      }
+    });
+  </script>
+</head>
+<body onload="$('body').show();" style="display:none;">
+  <a title="View source on Github" href="https:/github.com/obedm503/dollar-array/" class="github-corner" aria-label="View source on Github">
+    <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#4582ec; color:#fff; position: fixed; top: 0; border: 0; right: 0;" aria-hidden="true">
+      <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+      <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+      <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
+    </svg>
+  </a>
+  <span id="top"></span>
+  <bootmark fetch="['README.md','DOCS.md']"></bootmark>
+  <div class="container">
+    <div class="row">
+      <div class="bootmark-main">
+        <hr />
+        <h2>Demo</h2>
+        <h4>Click <a href="https://github.com/obedm503/dollar-array/">HERE</a> to view the souce</h4>
+        <p>
+          This demo is dynamic. Every time the page loads the results you see are generated. You'll notice that the <a href="#randomizeTitle" class="page-scroll">randomize</a> result changes on every page load. Also two global variables, "exampleArray" and "array", have been defined in case anyone wants to try $arrayJS in the browser console.
+        </p>
+        <b>key: </b> <span class="key str"></span>
+        <hr />
+        <b>original array</b>
+        <pre class="prettyprint linenums" id="original"></pre>
+        <hr />
+        <b>array.propExists(<span class="key str"></span>)</b>
+        <pre class="prettyprint linenums" id="propExists"></pre>
+        <hr />
+        <b>array.filterByProp(<span class="key str"></span>)</b>
+        <pre class="prettyprint linenums" id="filterByProp"></pre>
+        <hr />
+        <b>array.invert(<span class="kwd">true</span>)</b>
+        <pre class="prettyprint linenums" id="invert"></pre>
+        <hr />
+        <b>array.ascend(<span class="kwd">true</span>)</b>
+        <pre class="prettyprint linenums" id="ascend"></pre>
+        <hr />
+        <b>array.descend(<span class="kwd">true</span>)</b>
+        <pre class="prettyprint linenums" id="descend"></pre>
+        <hr />
+        <b id="randomizeTitle">.randomize(<span class="kwd">true</span>)</b>
+        <pre class="prettyprint linenums" id="randomize"></pre>
+        <hr />
+        <b>array.random()</b>
+        <pre class="prettyprint linenums" id="random"></pre>
+        <hr />
+        <b>array.toObject(<span class="key str"></span>)</b>
+        <pre class="prettyprint linenums" id="toObject"></pre>
+        <hr />
+        <b>array.group(<pre class="prettyprint" style="display:inline;padding:4px">{ A: function(o){ return o.lastname[0] === "A" }, P: function(o){ return o.lastname[0] === "P" } }</pre>)</b>
+        <br /><br />
+        <pre class="prettyprint linenums" id="group"></pre>
+      </div>
+    </div>
+  </div>
+  <bootmark fetch="CHANGELOG.md"></bootmark>
+  <a id="to-top" href="#top" class="page-scroll btn btn-dark btn-lg" style="display: block; position: fixed;">
+    <i class="fa fa-chevron-up fa-fw fa-1x"></i>
+  </a>
 </body>
