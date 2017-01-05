@@ -1,23 +1,62 @@
 {
   "name": "dollar-array",
   "repository": "git:https://github.com/obedm503/dollar-array.git",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "description": "A tiny utility library for working with arrays.",
-  "main": "./dist/dollar-array.min.js",
+  "main": "dist/dollar-array.js",
   "author": "obedm503",
   "license": "MIT",
+  "format":"cjs",
   "devDependencies": {
-    "babel-preset-es2015": "^6.18.0",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^6.1.2",
-    "gulp-jsdoc-to-markdown": "^1.2.2",
-    "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^2.0.0",
-    "gulp-util": "^3.0.7",
-    "jsdoc-to-markdown": "v2.0.1"
+    "babel-core": "^6.21.0",
+    "jsdoc-to-markdown": "v2.0.1",
+    "jspm": "^0.17.0-beta.32",
+    "uglify-js": "^2.7.5"
   },
   "dependencies": {},
   "scripts": {
-    "test": "node test.js"
+    "test": "node test.js",
+    "docs":"jsdoc2md > DOCS.md",
+    "build": "jspm build src/dollar-array.js dist/dollar-array.js --format umd --source-map-contents --inline-source-maps --global-name $array && echo ok   done not minified && echo      uglifying... && uglifyjs dist/dollar-array.js --output dist/dollar-array.min.js --mangle --source-map dist/dollar-array.min.js.map --in-source-map dist/dollar-array.js.map --comments  --stats -- && echo ok   done minified"
+  },
+  "jsdoc2md":{
+    "files":"src/*.js",
+    "module-index-format":"grouped",
+    "property-list-format":"list",
+    "param-list-format":"table",
+    "member-index-format":"grouped",
+    "name-format":true,
+    "example-lang":"js"
+  },
+  "jspm": {
+    "dependencies": {
+      "plugin-babel": "npm:systemjs-plugin-babel@^0.0.18"
+    },
+    "devDependencies": {
+      "babel-runtime": "npm:babel-runtime@^5.8.24",
+      "core-js": "npm:core-js@^1.1.4",
+      "fs": "npm:jspm-nodelibs-fs@^0.2.0",
+      "path": "npm:jspm-nodelibs-path@^0.2.0",
+      "process": "npm:jspm-nodelibs-process@^0.2.0"
+    },
+    "buildConfig": {
+      "transpileES6": true
+    },
+    "overrides": {
+      "npm:babel-runtime@5.8.38": {
+        "main": false,
+        "dependencies": {},
+        "optionalDependencies": {
+          "core-js": "^1.2.0"
+        }
+      }
+    }
+  },
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "parserOptions": {
+      "ecmaVersion": 6,
+      "sourceType": "module"
+    }
   }
 }
