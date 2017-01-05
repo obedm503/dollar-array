@@ -5,3 +5,4 @@ gulpfile.js
 KNUTH-SHUFFLE-LICENSE.txt
 src/
 index.html
+jspm_packages/

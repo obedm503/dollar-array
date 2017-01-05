@@ -3,18 +3,18 @@
   <title>$array.js</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <style>
-  .github-corner:hover .octo-arm{ animation:octocat-wave 560ms ease-in-out }
-  @keyframes octocat-wave {
-    0%, 100% { transform:rotate(0) } 20%, 60% { transform:rotate(-25deg) } 40%, 80% {transform:rotate(10deg) }
-  }
-  @media(max-width:500px){
-    .github-corner:hover .octo-arm { animation:none } .github-corner .octo-arm { animation:octocat-wave 560ms ease-in-out }
-  }
-  #to-top { display: none; position: fixed; bottom: 5px; right: 5px; }
-  .btn-dark { border-radius: 0; color: #fff; background-color: rgba(69,130,236, 0.4); }
-  .btn-dark:hover, .btn-dark:focus, .btn-dark:active { color: #fff; background-color: rgba(69,130,236, 1); }
+    .github-corner:hover .octo-arm{ animation:octocat-wave 560ms ease-in-out }
+    @keyframes octocat-wave {
+      0%, 100% { transform:rotate(0) } 20%, 60% { transform:rotate(-25deg) } 40%, 80% {transform:rotate(10deg) }
+    }
+    @media(max-width:500px){
+      .github-corner:hover .octo-arm { animation:none } .github-corner .octo-arm { animation:octocat-wave 560ms ease-in-out }
+    }
+    #to-top { display: none; position: fixed; bottom: 5px; right: 5px; }
+    .btn-dark { border-radius: 0; color: #fff; background-color: rgba(69,130,236, 0.4); }
+    .btn-dark:hover, .btn-dark:focus, .btn-dark:active { color: #fff !important; background-color: rgba(69,130,236, 1); }
   </style>
-  <script src="https://obedm503.github.io/bootmark/dist/bootmark.bundle.min.js"></script>
+  <script src="https://unpkg.com/bootmark@0.7.1/dist/bootmark.bundle.min.js"></script>
   <script>
     showdown.extension('fix-markdown', function () {
       return [{
@@ -26,27 +26,23 @@
         filter: function(html, converter, options){
           var $div = $('<div></div>').html(html);
 
-          $('a[name^="$"]', $div).each(function(){
+          $('a[name*="$"]', $div).each(function(){
             var $this = $(this);
-            var name = $this.attr('name');
             // remove $ from name
-            $this.attr('name', name.substring(1) );
+            $this.attr('name', $this.attr('name').replace(/\$/g, '') );
           });
 
-          $('a[href^="#$"]', $div).each(function(){
+          $('a[href*="$"]', $div).each(function(){
             var $this = $(this);
-            var href = $this.attr('href');
             // remove $ from href
-            $this.attr( 'href', '#' + href.substring(2) );
+            $this.attr( 'href', $this.attr('href').replace(/\$/g, '') );
           });
 
           return $div.html();
         }
       }];
     });
-  </script>
-  <script src="dist/dollar-array.min.js"></script>
-  <script>
+
     $.fn.bootmark.options = { html: { toc: false }, showdown: { extensions: ['fix-markdown'] } };
     var key = 'lastname',
     filterByProp,
@@ -58,31 +54,10 @@
       { "name": "Pedro", "lastname": "Algo", "age":30 }
     ];
     function formatArray(elementId, array){
-      var inner = ( typeof array ==='string' )? array : JSON.stringify(array, null, 1);
-      $('#'+ elementId).html('<code class="js language-js">' + inner + '</code>');
+      var inner = ( typeof array ==='string' ) ? array : JSON.stringify(array, null, 1);
+      $('#'+ elementId).html('<pre class="prettyprint linenums" id="original"><code class="js language-js">' + inner + '</code></pre>');
     }
-    window.onload = function(){
-      array = $array(exampleArray.slice(0));
-      console.log('exampleArray: ', exampleArray);
-      console.log('array: ', array);
-      $('.key').html('"' + key + '"');
 
-      var conditionals = {
-        P: function(o){ return o[key][0] === 'P' },
-        A: function(o){ return o[key][0] === 'A' }
-      };
-
-      formatArray('original', exampleArray);
-      formatArray('propExists', array.propExists(key));
-      formatArray('filterByProp', array.filterByProp(key, null, true));
-      formatArray('invert', array.invert(true));
-      formatArray('ascend', array.ascend(key, true));
-      formatArray('descend', array.descend(key, true));
-      formatArray('randomize', array.randomize(true));
-      formatArray('random', array.random());
-      formatArray('toObject', array.toObject(key));
-      formatArray('group', array.group(conditionals));
-    };
     //#to-top button appears after scrolling
     var fixed = false;
     $(document).scroll(function scroll() {
@@ -108,7 +83,48 @@
         }
       }
     });
+
+    function go($array){
+      array = $array(exampleArray.slice(0));
+      console.log('exampleArray: ', exampleArray);
+      console.log('array: ', array);
+      $('.key').html('"' + key + '"');
+
+      var conditionals = {
+        P: function(o){ return o[key][0] === 'P' },
+        A: function(o){ return o[key][0] === 'A' }
+      };
+
+      formatArray('original', exampleArray);
+      formatArray('propExists', array.propExists(key));
+      formatArray('filterByProp', array.filterByProp(key, null, true));
+      formatArray('invert', array.invert(true));
+      formatArray('ascend', array.ascend(key, true));
+      formatArray('descend', array.descend(key, true));
+      formatArray('randomize', array.randomize(true));
+      formatArray('random', array.random());
+      formatArray('toObject', array.toObject(key));
+      formatArray('group', array.group(conditionals));
+
+      prettyPrint();
+    }
   </script>
+
+  <!-- <script src="jspm_packages/system.js"></script>
+  <script src="jspm.config.js"></script>
+  <script>
+    System.import('dollar-array').then(function(){
+      go($array);
+    });
+  </script> -->
+
+  <script src="dist/dollar-array.min.js"></script>
+  <script>
+    window.onload = function(){
+      go($array);
+    };
+  </script>
+
 </head>
 <body onload="$('body').show();" style="display:none;">
   <a title="View source on Github" href="https:/github.com/obedm503/dollar-array/" class="github-corner" aria-label="View source on Github">
@@ -132,35 +148,35 @@
         <b>key: </b> <span class="key str"></span>
         <hr />
         <b>original array</b>
-        <pre class="prettyprint linenums" id="original"></pre>
+        <span id="original"></span>
         <hr />
         <b>array.propExists(<span class="key str"></span>)</b>
-        <pre class="prettyprint linenums" id="propExists"></pre>
+        <span id="propExists"></span>
         <hr />
         <b>array.filterByProp(<span class="key str"></span>)</b>
-        <pre class="prettyprint linenums" id="filterByProp"></pre>
+        <span id="filterByProp"></span>
         <hr />
         <b>array.invert(<span class="kwd">true</span>)</b>
-        <pre class="prettyprint linenums" id="invert"></pre>
+        <span id="invert"></span>
         <hr />
         <b>array.ascend(<span class="kwd">true</span>)</b>
-        <pre class="prettyprint linenums" id="ascend"></pre>
+        <span id="ascend"></span>
         <hr />
         <b>array.descend(<span class="kwd">true</span>)</b>
-        <pre class="prettyprint linenums" id="descend"></pre>
+        <span id="descend"></span>
         <hr />
         <b id="randomizeTitle">.randomize(<span class="kwd">true</span>)</b>
-        <pre class="prettyprint linenums" id="randomize"></pre>
+        <span id="randomize"></span>
         <hr />
         <b>array.random()</b>
-        <pre class="prettyprint linenums" id="random"></pre>
+        <span id="random"></span>
         <hr />
         <b>array.toObject(<span class="key str"></span>)</b>
-        <pre class="prettyprint linenums" id="toObject"></pre>
+        <span id="toObject"></span>
         <hr />
         <b>array.group(<pre class="prettyprint" style="display:inline;padding:4px">{ A: function(o){ return o.lastname[0] === "A" }, P: function(o){ return o.lastname[0] === "P" } }</pre>)</b>
         <br /><br />
-        <pre class="prettyprint linenums" id="group"></pre>
+        <span id="group"></span>
       </div>
     </div>
   </div>

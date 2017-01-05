@@ -6,10 +6,19 @@ For some guidelines see [keepachangelog.com](https://keepachangelog.com/).
 ----
 ## Future
 ### New
-- when ES6 support is wide, rewrite into class syntax
+- when ES6 support is wide, rewrite into `class $array extends Array` syntax
 
 ### Fix
 - ...
+
+----
+## 2.0.2 - 2017-01-05
+### New
+- rewritten in ES6 modules
+- using jspm & Systemjs for bundling and babel for transpiling
+- exports a `$array` global as well as [UMD](https://github.com/umdjs/umd) "`require('dollar-array').$array`"
+- `dist` files have source maps
+- removed gulp, gulp-rename, gulp-babel, gulp-jsdoc-to-markdown, gulp-uglify, gulp-util dev-dependencies
 
 ----
 ## 2.0.1 - 2016-12-25
