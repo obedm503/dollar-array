@@ -1,6 +1,6 @@
 {
   "name": "dollar-array",
-  "description": "A tiny utility library for working with arrays [of objects].",
+  "description": "A tiny utility library for working with arrays.",
   "main": "./dist/dollar-array.js",
   "authors": [
     "obedm503"
