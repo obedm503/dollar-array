@@ -1,4 +1,5 @@
 import { $array } from 'dollar-array';
+import { clone } from 'private';
 
 /**
 * @function invert
@@ -27,8 +28,8 @@ import { $array } from 'dollar-array';
 *  {"name":"Juan","lastname":"Perez","user_id":"1234","age":42}
 *]
 */
-export default function invert(useNewArr){
-  let arr = useNewArr ? $array( JSON.parse(JSON.stringify(this)) ) : this;
+export default function invert(array, useNewArr){
+  let arr = useNewArr ? $array( clone(array) ) : array;
 
   // actual invert
   // http://stackoverflow.com/questions/5276953/what-is-the-most-efficient-way-to-reverse-an-array-in-javascript

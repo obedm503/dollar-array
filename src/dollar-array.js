@@ -66,6 +66,7 @@ function $array(array){
   }
   // methods are not enumerable, writable, or configurable
   // significantly faster than changing the prototype
+  // but not as pretty as ES6:s class $array extends Array {}
   Object.defineProperties(array, properties);
 
   return array;
@@ -74,15 +75,33 @@ function $array(array){
 // public methods
 /** @lends $array.prototype */
 const properties = {
-  propExists: { value: propExists },
-  filterByProp: { value: filterByProp },
-  invert: { value: invert },
-  randomize: { value: randomize },
-  random: { value: random },
-  ascend: { value: ascend },
-  descend: { value: descend },
-  toObject: { value: toObject },
-  group: { value: group },
+  propExists: { value: function(...args) {
+    propExists(this, ...args)
+  } },
+  filterByProp: { value: function(...args) {
+    filterByProp(this, ...args)
+  } },
+  invert: { value: function(...args) {
+    invert(this, ...args)
+  } },
+  randomize: { value: function(...args) {
+    randomize(this, ...args)
+  } },
+  random: { value: function(...args) {
+    random(this, ...args)
+  } },
+  ascend: { value: function(...args) {
+    ascend(this, ...args)
+  } },
+  descend: { value: function(...args) {
+    descend(this, ...args)
+  } },
+  toObject: { value: function(...args) {
+    toObject(this, ...args)
+  } },
+  group: { value: function(...args) {
+    group(this, ...args)
+  } },
 };
 // reference to constructor doesn't change anything because `$array` doesn't return "this",
 // it returns an Array with a few extra methods

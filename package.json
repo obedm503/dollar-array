@@ -6,29 +6,32 @@
   "main": "dist/dollar-array.js",
   "author": "obedm503",
   "license": "MIT",
-  "format":"cjs",
+  "format": "cjs",
   "devDependencies": {
     "babel-core": "^6.21.0",
+    "jasmine": "^2.5.3",
     "jsdoc-to-markdown": "v2.0.1",
-    "jspm": "^0.17.0-beta.32",
+    "jspm": "^0.17.0-beta.41",
+    "node-jspm-jasmine": "^2.5.0",
     "uglify-js": "^2.7.5"
   },
   "dependencies": {},
   "scripts": {
-    "test": "node test.js",
-    "docs":"jsdoc2md > DOCS.md",
+    "test": "jspmjasmine",
+    "docs": "jsdoc2md > DOCS.md",
     "build": "jspm build src/dollar-array.js dist/dollar-array.js --format umd --source-map-contents --inline-source-maps --global-name $array && echo ok   done not minified && echo      uglifying... && uglifyjs dist/dollar-array.js --output dist/dollar-array.min.js --mangle --source-map dist/dollar-array.min.js.map --in-source-map dist/dollar-array.js.map --comments  --stats -- && echo ok   done minified"
   },
-  "jsdoc2md":{
-    "files":"src/*.js",
-    "module-index-format":"grouped",
-    "property-list-format":"list",
-    "param-list-format":"table",
-    "member-index-format":"grouped",
-    "name-format":true,
-    "example-lang":"js"
+  "jsdoc2md": {
+    "files": "src/*.js",
+    "module-index-format": "grouped",
+    "property-list-format": "list",
+    "param-list-format": "table",
+    "member-index-format": "grouped",
+    "name-format": true,
+    "example-lang": "js"
   },
   "jspm": {
+    "configFile": "jspm.config.js",
     "dependencies": {
       "plugin-babel": "npm:systemjs-plugin-babel@^0.0.18"
     },

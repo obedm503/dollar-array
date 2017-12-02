@@ -20,11 +20,14 @@
 * ];
 * $array(exampleArray).propExists('user_id'); // true
 */
-export default function propExists(property){
-  if(!property || typeof property !== 'string'){ throw Error('$arrayJS incorrect parameters'); }
-  let i = this.length;
+export default function propExists(arr, property){
+  if(!property || typeof property !== 'string'){
+    throw Error('$arrayJS incorrect parameters');
+  }
+  
+  let i = arr.length;
   while(i--){
-    if( this[i][property] ){
+    if( arr[i][property] ){
       // property found
       return true;
     }

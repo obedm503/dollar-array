@@ -78,12 +78,15 @@ import { $array } from 'dollar-array';
 * ]
 *]
 */
-export default function group(conds, thisArg, ...otherArgs){
+export default function group(arr, conds, thisArg, ...otherArgs){
   let isArray = Array.isArray(conds);
   let condsKeys = Object.keys(conds);
   let condsKeysLen = condsKeys.length;
   // test arguments
-  if( !arguments.length || !condsKeysLen || ( !isArray && typeof conds !== 'object') ){ throw Error('$arrayJS bad arguments'); }
+  if( !arguments.length || !condsKeysLen || ( !isArray && typeof conds !== 'object') ){
+    throw Error('$arrayJS bad arguments');
+  }
+  
   // if array, initialValue is an `array` of conds.length + 1 $arrays. else it's an object
   let initialValue = isArray ?
     $array( Array.apply(null, { length: condsKeysLen + 1 }).map(_=>$array()) ) :
@@ -91,7 +94,7 @@ export default function group(conds, thisArg, ...otherArgs){
   let usedBefore = [];
   let unmatchedKey = isArray ? condsKeysLen : 'unmatched' ;
 
-  return this.reduce( ( accumulator, item, itemIndex )=>{
+  return arr.reduce( ( accumulator, item, itemIndex )=>{
     let used;
     let i = condsKeysLen;
 
@@ -102,7 +105,7 @@ export default function group(conds, thisArg, ...otherArgs){
       // array matching a cond is itself or a $array() if it's undefineds
       accumulator[condKey] = ( typeof accumulator[condKey] !== 'undefined') ? accumulator[condKey] : $array();
 
-      if( conds[condKey].call(thisArg || item, item, itemIndex, this, ...otherArgs) ){ // condition was met
+      if( conds[condKey].call(thisArg || item, item, itemIndex, arr, ...otherArgs) ){ // condition was met
         used = true;
         push(accumulator[condKey], item);
       }

@@ -1,4 +1,5 @@
 import { $array } from 'dollar-array';
+import { clone } from 'private';
 
 /**
 * @function randomize
@@ -21,17 +22,16 @@ import { $array } from 'dollar-array';
 * ];
 * $array(exampleArray).randomize(); //randomized array...
 */
-export default function randomize(useNewArr){
-  if(!this){ throw TypeError('$arrayJS "this" is undefined'); }
-  let arr = useNewArr? $array( JSON.parse(JSON.stringify(this)) ) : this;
-  let currentIndex = arr.length, temporaryValue, randomIndex;
+export default function randomize(arr, useNewArr){
+  let array = useNewArr ? $array( clone(arr) ) : arr;
+  let currentIndex = array.length, temporaryValue, randomIndex;
 
   while(0 !== currentIndex) {
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex -= 1;
-    temporaryValue = arr[currentIndex];
-    arr[currentIndex] = arr[randomIndex];
-    arr[randomIndex] = temporaryValue;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
   }
-  return arr;
+  return array;
 }

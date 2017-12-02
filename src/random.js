@@ -1,3 +1,5 @@
+import { clone } from 'private';
+
 /**
 * @function random
 * @memberof $array.prototype
@@ -18,10 +20,10 @@
 * ];
 * $array(exampleArray).random(); // a random element...
 */
-export default function random(){
-  let arr = JSON.parse(JSON.stringify(this));
-  let index = Math.floor( Math.random() * arr.length );
-  let obj = arr[index];
+export default function random(arr){
+  let array = clone(arr);
+  let index = Math.floor( Math.random() * array.length );
+  let obj = array[index];
   let type = typeof obj;
   // just for safety
   if(type !== 'number' && type !== 'string' && type !== 'boolean' && type !== 'undefined' && obj !== null){

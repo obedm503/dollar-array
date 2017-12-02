@@ -1,13 +1,12 @@
-SystemJS.config({
+System.config({
   paths: {
     "github:": "jspm_packages/github/",
-    "npm:": "jspm_packages/npm/",
-    "dollar-array/": "src/"
+    "npm:": "jspm_packages/npm/"
   },
-  browserConfig: {
-    "baseURL": "/",
-    //"production":true
-  },
+  packageConfigPaths: [
+    "npm:@*/*.json",
+    "npm:*.json"
+  ],
   devConfig: {
     "map": {
       "babel-runtime": "npm:babel-runtime@5.8.38",
@@ -35,63 +34,33 @@ SystemJS.config({
     ]
   },
   map: {
-    "babel": "npm:babel-core@5.8.38"
-  },
-  packages: {
-    "dollar-array": {
-      "main": "dollar-array.js",
-      "format":"esm"
-    },
-    "ascend": {
-      "main": "../src/ascend.js",
-      "format":"esm"
-    },
-    "prop-exists": {
-      "main": "../src/prop-exists.js",
-      "format":"esm"
-    },
-    "filter-by-prop": {
-      "main": "../src/filter-by-prop.js",
-      "format":"esm"
-    },
-    "invert": {
-      "main": "../src/invert.js",
-      "format":"esm"
-    },
-    "randomize": {
-      "main": "../src/randomize.js",
-      "format":"esm"
-    },
-    "random": {
-      "main": "../src/random.js",
-      "format":"esm"
-    },
-    "descend": {
-      "main": "../src/descend.js",
-      "format":"esm"
-    },
-    "group": {
-      "main": "../src/group.js",
-      "format":"esm"
-    },
-    "to-object": {
-      "main": "../src/to-object.js",
-      "format":"esm"
-    },
-    "private": {
-      "main": "../src/private.js",
-      "format":"esm"
-    }
+    "babel": "npm:babel-core@5.8.38",
+    "plugin-babel": "npm:systemjs-plugin-babel@0.0.18",
+
+    "dollar-array":"src/dollar-array.js",
+    "ascend":"src/ascend.js",
+    "prop-exists":"src/prop-exists.js",
+    "filter-by-prop":"src/filter-by-prop.js",
+    "invert":"src/invert.js",
+    "randomize":"src/randomize.js",
+    "random":"src/random.js",
+    "private":"src/private.js",
+    "descend":"src/descend.js",
+    "group":"src/group.js",
+    "to-object":"src/to-object.js"
   }
 });
 
-SystemJS.config({
-  packageConfigPaths: [
-    "npm:@*/*.json",
-    "npm:*.json"
-  ],
-  map: {
-    "plugin-babel": "npm:systemjs-plugin-babel@0.0.18"
-  },
-  packages: {}
-});
+// System.config({
+//   browserConfig: {
+//     "baseURL": "./src",
+//     "production":true
+//   },
+//   packageConfigPaths: [
+//     "npm:@*/*.json",
+//     "npm:*.json"
+//   ],
+//   map: {
+//     "plugin-babel": "npm:systemjs-plugin-babel@0.0.18"
+//   }
+// });

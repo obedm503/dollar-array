@@ -1,5 +1,6 @@
 import { sort } from 'private';
 import { $array } from 'dollar-array';
+import propExists from 'prop-exists';
 
 /**
 * @function ascend
@@ -35,8 +36,12 @@ import { $array } from 'dollar-array';
 * //  { name: "Juan", lastname: "Perez", user_id:"1234", age:42 }
 * //]
 */
-export default function ascend(property, useNewArr){
-  if( !this.propExists(property) ){ throw Error('$arrayJS no correct key given'); }
-  let arr = useNewArr ? $array( JSON.parse(JSON.stringify(this)) ) : this;
-  return arr.sort(sort(property));
+export default function ascend(arr, property, useNewArr){
+  if( !propExists(arr, property) ){
+    throw Error('$arrayJS no correct key given');
+  }
+
+  let array = useNewArr ? $array( JSON.parse(JSON.stringify(arr)) ) : arr;
+  
+  return array.sort(sort(property));
 }

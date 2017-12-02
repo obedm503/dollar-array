@@ -8,7 +8,7 @@
 * @function sort
 * @description helper function used by $array#ascend and $array#descend
 */
-export function sort(key) {
+export function sort(key){
   var sortOrder = 1;
   if(key[0] === "-") {
     sortOrder = -1;
@@ -26,4 +26,12 @@ export function sort(key) {
 */
 export function push(arr,item){
   arr[arr.length] = item;
+}
+
+/**
+* @function clone
+* @description deep clones an array
+*/
+export function clone(arr){
+  return JSON.parse( JSON.stringify(arr) );
 }

@@ -1,4 +1,5 @@
 import { $array } from 'dollar-array';
+import { clone } from 'private';
 
 /**
 * @function filterByProp
@@ -35,15 +36,20 @@ import { $array } from 'dollar-array';
 *$array(exampleArray).filterByProp('user_id','id');
 * // [{id:"1234"}, {id:"6789"}] modifies "array"
 */
-export default function filterByProp(oldKey, newKey, useNewArr){
-  if(typeof oldKey === 'undefined' || !this){ throw TypeError(); }
-  let key = ( typeof newKey === 'undefined' || newKey === null ) ? oldKey : newKey;
-  let arr = useNewArr ? $array( JSON.parse(JSON.stringify(this)) ) : this;
-  for(let i = 0, l = arr.length; i < l; i++){
-    let obj = {};
-    let value = arr[i];
-    obj[key] = value[oldKey];
-    arr[i] = obj;
+export default function filterByProp(arr, oldKey, newKey, useNewArr){
+  if(typeof oldKey === 'undefined' || !arr){
+    throw TypeError();
   }
-  return arr;
+
+  let key = ( typeof newKey === 'undefined' || newKey === null ) ? oldKey : newKey;
+
+  let array = useNewArr ? $array( clone(arr) ) : arr;
+
+  for(let i = 0, l = array.length; i < l; i++){
+    let obj = {};
+    let value = array[i];
+    obj[key] = value[oldKey];
+    array[i] = obj;
+  }
+  return array;
 }

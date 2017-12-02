@@ -26,18 +26,26 @@
 *  "Algo": { name: "Pedro", lastname: "Algo", age:30  }
 *}
 */
-export default function toObject(property){
-  if( typeof property === 'undefined' || !this){ throw Error('$arrayJS: property or context this: undefined'); }
+export default function toObject(arr, property){
+  if( typeof property === 'undefined' || !arr){
+    throw Error('$arrayJS: property or context this: undefined');
+  }
+
   let obj = {};
-  let i = this.length;
+  let i = arr.length;
   while(i--){
     // property's value becomes the propertyName
-    let newKey = this[i][ property ];
+    let newKey = arr[i][ property ];
     // skip undefined values
-    if( typeof newKey === 'undefined' ){ continue; }
-    if( obj.hasOwnProperty(newKey) ){ throw Error('$arrayJS repeated values for property'); }
+    if( typeof newKey === 'undefined' ){
+      continue;
+    }
+    
+    if( obj.hasOwnProperty(newKey) ){
+      throw Error('$arrayJS repeated values for property');
+    }
 
-    obj[newKey] = this[i];
+    obj[newKey] = arr[i];
   }
   return obj;
 }
